@@ -4,9 +4,9 @@
 # this can be used in a CI job with variables.
 
 
-# igor mitaka
+# igor ocata
 export REMOTE=10.245.168.39
-export BUNDLE_FILE="bundle-mitaka.yaml"
+export BUNDLE_FILE="bundle-ocata.yaml"
 export WORKSPACE="/tmp/WORKSPACE-IGOR"
 
 ./runners/openstack-on-lxd/openstack-on-lxd-runner.sh

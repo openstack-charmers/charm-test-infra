@@ -23,7 +23,8 @@
 export JUJU_WAIT_CMD="time $REMOTE_WORKSPACE/juju-wait/juju-wait -v"
 export NOVARC_CMD=". $REMOTE_WORKSPACE/openstack-on-lxd/novarc"
 export SSH_OPTS="-oStrictHostKeyChecking=no"
-export PKGS="$(tr \"\\n\" ' '<packages.txt)"
+export PKGS="$(tr \"\\n\" ' '<$(dirname "$0")/packages.txt)"
+
 
 function rexec() {
   ssh -t $SSH_OPTS $REMOTE_USER@$REMOTE "$1"
