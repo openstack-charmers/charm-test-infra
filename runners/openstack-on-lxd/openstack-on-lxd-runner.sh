@@ -10,18 +10,8 @@
 # as it will forcefully re-use (erase) disks for zpools.  Do not use for
 # local developer machine deployment such as your laptop.  It will not end well.
 
-
-
-[[ -z "$REMOTE" ]] && export REMOTE=10.245.168.39  # igor mitaka
+[[ -z "$REMOTE" ]] && export REMOTE="n.n.n.n"
 [[ -z "$BUNDLE_FILE" ]] && export BUNDLE_FILE="bundle-mitaka.yaml"
-
-#[[ -z "$REMOTE" ]] && export REMOTE=10.245.168.57   # egede Newton
-#[[ -z "$BUNDLE_FILE" ]] && export BUNDLE_FILE="bundle-newton.yaml"
-
-#[[ -z "$REMOTE" ]] && export REMOTE=10.245.168.56   # couder mitaka ext-port eth1
-#[[ -z "$BUNDLE_FILE" ]] && export BUNDLE_FILE="bundle-newton.yaml"
-
-
 
 [[ -z "$OS_CLIENT_UCA" ]] && export OS_CLIENT_UCA="newton"
 [[ -z "$REMOTE_WORKSPACE" ]] && export REMOTE_WORKSPACE="/home/ubuntu/WORKSPACE"
