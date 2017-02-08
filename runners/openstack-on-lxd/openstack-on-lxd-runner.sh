@@ -49,6 +49,12 @@ ssh-keygen -f "$HOME/.ssh/known_hosts" -R $REMOTE ||:
 rexec "uname -a"
 
 
+# GENERATE SSH PUB KEY
+rexec << EOF_PUBKEY_GENERATE
+  ssh-keygen -t rsa -b 4096 -q -N '' -f /home/${REMOTE_USER}/.ssh/id_rsa ||:
+EOF_PUBKEY_GENERATE
+
+
 # INSTALL PACKAGES
 mkdir -vp $WORKSPACE
 if [[ -z "$(find $WORKSPACE -type f -name apt.touch -mmin +90)" ]]; then
@@ -176,7 +182,6 @@ EOF_NETWORK_CONFIGURE
 # ADD NOVA KEYPAIR
 rexec << EOF_KEYPAIR_CREATE
   $NOVARC_CMD
-  ssh-keygen -t rsa -b 4096 -q -N '' -f /home/${REMOTE_USER}/.ssh/id_rsa
   openstack keypair create --public-key /home/${REMOTE_USER}/.ssh/id_rsa.pub mykey
 EOF_KEYPAIR_CREATE
 
