@@ -3,6 +3,7 @@ build-essential
 byobu
 bzr
 colordiff
+cpu-checker
 curl
 git
 htop

@@ -183,7 +183,7 @@ EOF_NETWORK_CONFIGURE
 # ADD NOVA KEYPAIR
 rexec << EOF_KEYPAIR_CREATE
   $NOVARC_CMD
-  openstack keypair create --public-key /home/${REMOTE_USER}/.ssh/id_rsa.pub mykey
+  openstack keypair create --public-key /home/${REMOTE_USER}/.ssh/id_rsa.pub mykey ||:
 EOF_KEYPAIR_CREATE
 
 
@@ -212,14 +212,12 @@ EOF_INSTANCE_CREATE
 
 
 # ADD NOVA SECGROUPS
-#rexec << EOF_SECGROUP_CREATE
-#  $NOVARC_CMD
-#  neutron security-group-rule-create --protocol icmp --direction ingress \$(openstack security group list | grep default | awk '{ print \$2 }')
-#  neutron security-group-rule-create --protocol tcp --port-range-min 22 --port-range-max 22 --direction ingress \$(openstack security group list | grep default | awk '{ print \$2 }')
-#EOF_SECGROUP_CREATE
+rexec << EOF_SECGROUP_CREATE
+  $NOVARC_CMD
+  neutron security-group-rule-create --protocol icmp --direction ingress default
+  neutron security-group-rule-create --protocol tcp --port-range-min 22 --port-range-max 22 --direction ingress default
+EOF_SECGROUP_CREATE
 
-
-# TODO: launch nova instances
 
 # TODO: confirm connectivity to nova instances
 
