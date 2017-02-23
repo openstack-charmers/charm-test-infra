@@ -1,0 +1,9 @@
+# Model defaults from charm-test-infra
+agent-stream: proposed
+default-series: xenial
+image-stream: daily
+test-mode: true
+transmit-vendor-metrics: false
+enable-os-refresh-update: false
+enable-os-upgrade: false
+automatically-retry-hooks: false
