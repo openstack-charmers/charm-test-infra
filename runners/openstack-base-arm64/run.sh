@@ -11,7 +11,7 @@
 : ${OCT_CODIR:="$HOME/temp/openstack-charm-testing"}
 
 : ${JUJU_WAIT_CMD:="time timeout 60m $JUJU_WAIT_CODIR/juju-wait -v"}
-: ${CONFIGURE_CMD:="cd $OCT_CODIR; ./configure arm64; cd"}
+: ${CONFIGURE_CMD:="./configure arm64"}
 
 ## Controller env vars
 : ${CONTROLLER_NAME:="ruxton-maas"}
@@ -57,7 +57,9 @@ time timeout 90m juju deploy -m ${CONTROLLER_NAME}:${MODEL_NAME} $BUNDLE_FILE
 $JUJU_WAIT_CMD
 
 ## Configure
+cd $OCT_CODIR
 $CONFIGURE_CMD
+cd $HOME
 
 ## Test
 
