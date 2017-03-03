@@ -1,4 +1,4 @@
-# Model defaults from charm-test-infra
+# Bootstrap config defaults from charm-test-infra
 #   https://jujucharms.com/docs/2.1/controllers-creating
 #   https://jujucharms.com/docs/2.1/controllers
 bootstrap-timeout: 1200

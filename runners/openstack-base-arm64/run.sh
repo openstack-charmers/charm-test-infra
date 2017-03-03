@@ -16,10 +16,10 @@
 ## Controller env vars
 : ${CONTROLLER_NAME:="ruxton-maas"}
 : ${BOOTSTRAP_CONSTRAINTS:="arch=arm64 tags=gigabyte"}
-: ${MODEL_CONSTRAINTS:="$BOOTSTRAP_CONSTRAINTS"}
 
 ## Model env vars
 : ${MODEL_NAME:="openstack-base-arm64"}
+: ${MODEL_CONSTRAINTS:="$BOOTSTRAP_CONSTRAINTS"}
 : ${CONTROLLER_NAME:="ruxton-maas"}
 : ${OPENSTACK_BUNDLES_CODIR:="$HOME/temp/openstack-bundles"}
 : ${CTI_CODIR:="$HOME/temp/charm-test-infra"}
@@ -33,7 +33,6 @@
 juju switch $CONTROLLER_NAME ||\
     time juju bootstrap --bootstrap-constraints="$BOOTSTRAP_CONSTRAINTS" \
                        --auto-upgrade=false \
-                       --bootstrap-series=xenial \
                        --model-default=$CTI_CODIR/juju-configs/model-default.yaml \
                        --config=$CTI_CODIR/juju-configs/controller-default.yaml \
                        $CONTROLLER_NAME
