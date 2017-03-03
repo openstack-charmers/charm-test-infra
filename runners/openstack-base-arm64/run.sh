@@ -17,7 +17,6 @@
 : ${CONTROLLER_NAME:="ruxton-maas"}
 : ${BOOTSTRAP_CONSTRAINTS:="arch=arm64 tags=gigabyte"}
 : ${MODEL_CONSTRAINTS:="$BOOTSTRAP_CONSTRAINTS"}
-: ${BOOTSTRAP_TIMEOUT:="1200"}
 
 ## Model env vars
 : ${MODEL_NAME:="openstack-base-arm64"}
@@ -35,8 +34,8 @@ juju switch $CONTROLLER_NAME ||\
     time juju bootstrap --bootstrap-constraints="$BOOTSTRAP_CONSTRAINTS" \
                        --auto-upgrade=false \
                        --bootstrap-series=xenial \
-                       --bootstrap-timeout=$BOOTSTRAP_TIMEOUT \
                        --model-default=$CTI_CODIR/juju-configs/model-default.yaml \
+                       --config=$CTI_CODIR/juju-configs/controller-default.yaml \
                        $CONTROLLER_NAME
 
 ## Add model if it doesn't exist
