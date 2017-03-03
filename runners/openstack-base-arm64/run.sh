@@ -3,8 +3,8 @@
 # An example test runner for ARM64 OpenStack-Base bundle deploy on MAAS
 #
 # Default environment variable values represent a specific lab and must
-# be adjusted to suit.
-#
+# be adjusted to suit.  These default values will only take effect if an
+# environment variable is not already set.
 
 ## Tool env vars
 : ${JUJU_WAIT_CODIR:="$HOME/temp/juju-wait"}
@@ -57,6 +57,7 @@ time timeout 90m juju deploy -m ${CONTROLLER_NAME}:${MODEL_NAME} $BUNDLE_FILE
 $JUJU_WAIT_CMD
 
 ## Configure
+export TEST_IMAGE_URL_XENIAL
 cd $OCT_CODIR
 $CONFIGURE_CMD
 cd $HOME
@@ -66,3 +67,4 @@ cd $HOME
 ## Collect
 
 ## Destroy
+
