@@ -8,7 +8,7 @@
 
 ## Tool env vars
 : ${JUJU_WAIT_CODIR:="$HOME/temp/juju-wait"}
-: ${JUJU_WAIT_CMD:="time timeout 45m $JUJU_WAIT_CODIR/juju-wait -v"}
+: ${JUJU_WAIT_CMD:="time timeout 60m $JUJU_WAIT_CODIR/juju-wait -v"}
 
 : ${OCT_CODIR:="$HOME/temp/openstack-charm-testing"}
 : ${OCT_CONFIGURE_CMD:="$OCT_CODIR/configure dellstack"}
