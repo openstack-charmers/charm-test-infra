@@ -29,6 +29,9 @@
 : ${REF_BUNDLE_FILE:="development/openstack-base-xenial-mitaka/bundle.yaml"}
 : ${BUNDLE_FILE:="$(mktemp)"}
 
+## Fixture env vars
+: ${TEST_IMAGE_URL_XENIAL:="http://10.245.161.162/swift/v1/images/xenial-server-cloudimg-arm64-uefi1.img"}
+
 ## Bootstrap if not bootstrapped
 juju switch $CONTROLLER_NAME ||\
     time juju bootstrap --bootstrap-constraints="$BOOTSTRAP_CONSTRAINTS" \
