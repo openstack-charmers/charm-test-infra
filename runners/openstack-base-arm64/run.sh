@@ -1,22 +1,28 @@
 #!/bin/bash -ex
-#
 # An example test runner for exercising "openstack-bundles" style bundles with
 # MAAS 2.x and Juju 2.x.
 #
 # Default environment variable values represent a specific lab and may need to
 # be adjusted to suit.
+#
+# Example of `juju models` during a manual run:
+#   Model                                        Cloud/Region  Status     Machines  Cores  Access  Last connection
+#   controller                                   ruxton-maas   available         1     48  admin   just now
+#   default                                      ruxton-maas   available         0      -  admin   1 hour ago
+#   openstack-base-xenial-newton-development-0*  ruxton-maas   available        16    144  admin   just now
 
 
 # ----------------------------------------------------------------------------
-# TEMP EXAMPLE - Specific env vars coming from Jenkins
-# These will come out of this file and will be set by Jenkins builds.
+# TEMP EXAMPLE - These will come out of this file;  will be set by Jenkins.
 : ${BUNDLE_SCENARIO:="openstack-base"}
 : ${BUNDLE_STABILITY:="development"}
 : ${UBUNTU_RELEASE:="xenial"}
 : ${OPENSTACK_RELEASE:="ocata"}
 : ${ARCH:="arm64"}
 : ${TAGS:="gigabyte"}
+: ${CLOUD_NAME:="ruxton-maas"}
 # ----------------------------------------------------------------------------
+
 
 
 ## All env vars below are global generic defaults
