@@ -6,14 +6,16 @@
 # be adjusted to suit.  These default values will only take effect if an
 # environment variable is not already set.
 
+# ----------------------------------------------------------------------------
 # TEMP EXAMPLE - Specific env vars coming from Jenkins
-# These will come out of this file and will be set ahead of this script by Jenkins builds.
+# These will come out of this file and will be set by Jenkins builds.
 : ${BUNDLE_SCENARIO:="openstack-base"}
 : ${BUNDLE_STABILITY:="development"}
 : ${UBUNTU_RELEASE:="xenial"}
 : ${OPENSTACK_RELEASE:="ocata"}
-: ${ARCH:="arch64"}
+: ${ARCH:="arm64"}
 : ${TAGS:="gigabyte"}
+# ----------------------------------------------------------------------------
 
 
 # ===== All env vars below here are global generic defaults =====
@@ -44,7 +46,7 @@
 : ${BC_REPO:="https://github.com/openstack-charmers/bot-control"}
 : ${BC_REPO_BRANCH:="master"}
 : ${BC_CODIR:="${BASE_CODIR}/bot-control"}
-: ${CTI_REPO:="https://github.com/openstack-charmers/openstack-bundles"}
+: ${CTI_REPO:="https://github.com/ryan-beisner/charm-test-infra"}
 : ${CTI_REPO_BRANCH:="models-init-1702"}
 : ${CTI_CODIR:="${BASE_CODIR}/charm-test-infra"}
 
@@ -74,8 +76,17 @@
 : ${JUJU_WAIT_CMD:="time timeout $WAIT_TIMEOUT $JW_CODIR/juju-wait -v"}
 : ${CONFIGURE_CMD:="./configure arm64"}
 
-## Gather tools if not present
-    # NOT YET IMPLEMENTED
+## Gather tools
+rm -rf $BUNDLE_CODIR
+rm -rf $BC_CODIR
+rm -rf $JW_CODIR
+rm -rf $CTI_CODIR
+rm -rf $OCT_CODIR
+git clone --depth 1 $BUNDLE_REPO $BUNDLE_CODIR -b $BUNDLE_REPO_BRANCH
+git clone --depth 1 $BC_REPO     $BC_CODIR     -b $BC_REPO_BRANCH
+git clone --depth 1 $JW_REPO     $JW_CODIR     -b $JW_REPO_BRANCH
+git clone --depth 1 $CTI_REPO    $CTI_CODIR    -b $CTI_REPO_BRANCH
+bzr export $OCT_CODIR $OCT_REPO
 
 ## Validate existince of some required files
 for _FILEDIR in $BUNDLE_CODIR/$REF_BUNDLE_FILE \
