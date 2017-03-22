@@ -1,0 +1,31 @@
+clouds:
+
+  # Telco-Grade + Low-Latency Lab
+  icarus-maas:
+    type: maas
+    auth-types: [oauth1]
+    endpoint: http://t.b.d/MAAS
+
+  # Regression Virtual Lab (MAAS 1.x)
+  mutus-maas:
+    type: maas
+    auth-types: [oauth1]
+    endpoint: http://t.b.d/MAAS
+
+  # Mixed Architecture Lab
+  ruxton-maas:
+    type: maas
+    auth-types: [oauth1]
+    endpoint: http://10.245.168.6/MAAS
+
+  # Mixed IPv4 + IPv6 Virtual Lab
+  tiling-maas:
+    type: maas
+    auth-types: [oauth1]
+    endpoint: http://t.b.d/MAAS
+
+  # Pure IPv6 Virtual Lab
+  weyl-maas:
+    type: maas
+    auth-types: [oauth1]
+    endpoint: http://t.b.d/MAAS

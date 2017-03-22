@@ -9,18 +9,22 @@
 ## Tool env vars
 : ${JUJU_WAIT_CODIR:="$HOME/temp/juju-wait"}
 : ${OCT_CODIR:="$HOME/temp/openstack-charm-testing"}
+: ${BC_CODIR:="$HOME/temp/bot-control"}
+
 
 : ${JUJU_WAIT_CMD:="time timeout 60m $JUJU_WAIT_CODIR/juju-wait -v"}
 : ${CONFIGURE_CMD:="./configure arm64"}
 
+# Cloud env vars
+: ${CLOUD_NAME:="ruxton-maas"}
+
 ## Controller env vars
-: ${CONTROLLER_NAME:="ruxton-maas"}
+: ${CONTROLLER_NAME:="ruxton-maas-arm64"}
 : ${BOOTSTRAP_CONSTRAINTS:="arch=arm64 tags=gigabyte"}
 
 ## Model env vars
 : ${MODEL_NAME:="openstack-base-arm64"}
 : ${MODEL_CONSTRAINTS:="$BOOTSTRAP_CONSTRAINTS"}
-: ${CONTROLLER_NAME:="ruxton-maas"}
 : ${OPENSTACK_BUNDLES_CODIR:="$HOME/temp/openstack-bundles"}
 : ${CTI_CODIR:="$HOME/temp/charm-test-infra"}
 
@@ -32,17 +36,22 @@
 ## Fixture env vars
 : ${TEST_IMAGE_URL_XENIAL:="http://10.245.161.162/swift/v1/images/xenial-server-cloudimg-arm64-uefi1.img"}
 
+## Add cloud if not present
+juju show-cloud ${CLOUD_NAME} ||\
+    # NOT IMPLEMENTED
+    exit 1
+
 ## Bootstrap if not bootstrapped
 juju switch $CONTROLLER_NAME ||\
     time juju bootstrap --bootstrap-constraints="$BOOTSTRAP_CONSTRAINTS" \
                        --auto-upgrade=false \
                        --model-default=$CTI_CODIR/juju-configs/model-default.yaml \
                        --config=$CTI_CODIR/juju-configs/controller-default.yaml \
-                       $CONTROLLER_NAME
+                       $CLOUD_NAME $CONTROLLER_NAME
 
 ## Add model if it doesn't exist
 juju switch ${CONTROLLER_NAME}:${MODEL_NAME} ||\
-    juju add-model $MODEL_NAME $CONTROLLER_NAME --config=$CTI_CODIR/juju-configs/model-default.yaml
+    juju add-model $MODEL_NAME $CLOUD_NAME --config=$CTI_CODIR/juju-configs/model-default.yaml
 
 juju set-model-constraints -m $MODEL_NAME "$MODEL_CONSTRAINTS"
 
@@ -56,6 +65,18 @@ time timeout 90m juju deploy -m ${CONTROLLER_NAME}:${MODEL_NAME} $BUNDLE_FILE
 ## Wait for Juju model deployment to complete
 $JUJU_WAIT_CMD
 
+## Build openstack client virtualenv
+cd $BC_CODIR/tools/openstack-client-venv
+deactivate ||:
+tox
+. $BC_CODIR/tools/openstack-client-venv/.tox/openstack-client/bin/activate
+openstack --version
+cd $HOME
+
+
+exit 0
+
+
 ## Configure
 export TEST_IMAGE_URL_XENIAL
 cd $OCT_CODIR
@@ -63,8 +84,10 @@ $CONFIGURE_CMD
 cd $HOME
 
 ## Test
+cd $OCT_CODIR
+./instance_launch.sh 6 xenial-uefi
+cd $HOME
 
 ## Collect
 
 ## Destroy
-
