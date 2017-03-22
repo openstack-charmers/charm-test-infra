@@ -146,7 +146,9 @@ cd $WORKSPACE
 openstack --version
 
 
-exit 0
+exit 0  # end-of-the-line at the moment
+# Will push on once the above is settled wrt env names and pivot points.
+
 
 
 ## Configure
