@@ -31,7 +31,7 @@
 ## Manual run env vars
 : ${JENKINS_HOME:="$HOME"}
 : ${EXECUTOR_NUMBER:="0"}
-: ${WORKSPACE:="$(mktemp -d WORKSPACE.XXXXXXXXXX)"}
+: ${WORKSPACE:="$(mktemp -d /tmp/WORKSPACE.XXXXXXXXXX)"}
 
 ## Repo env vars
 : ${BASE_CODIR:="${JENKINS_HOME}/tools/${EXECUTOR_NUMBER}"}
@@ -65,7 +65,7 @@
 ## Bundle env vars
 : ${DATA_PORT_INTERFACE:="enP2p1s0f2"}
 : ${REF_BUNDLE_FILE:="${BUNDLE_STABILITY}/${BUNDLE_SCENARIO}-${UBUNTU_RELEASE}-${OPENSTACK_RELEASE}/bundle.yaml"}
-: ${BUNDLE_FILE:="$(mktemp bundle.XXXXXXXXXX.yaml)"}
+: ${BUNDLE_FILE:="$(mktemp /tmp/bundle.XXXXXXXXXX.yaml)"}
 : ${DEPLOY_TIMEOUT:="90m"}
 : ${WAIT_TIMEOUT:="45m"}
 
