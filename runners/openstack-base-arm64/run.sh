@@ -1,10 +1,11 @@
 #!/bin/bash -ex
 #
-# An example test runner for ARM64 OpenStack-Base bundle deploy on MAAS
+# An example test runner for exercising "openstack-bundles" style bundles with
+# MAAS 2.x and Juju 2.x.
 #
-# Default environment variable values represent a specific lab and must
-# be adjusted to suit.  These default values will only take effect if an
-# environment variable is not already set.
+# Default environment variable values represent a specific lab and may need to
+# be adjusted to suit.
+
 
 # ----------------------------------------------------------------------------
 # TEMP EXAMPLE - Specific env vars coming from Jenkins
@@ -18,7 +19,7 @@
 # ----------------------------------------------------------------------------
 
 
-# ===== All env vars below here are global generic defaults =====
+## All env vars below are global generic defaults
 
 ## Per-job env vars
 : ${BUNDLE_SCENARIO:="openstack-base"}
@@ -35,6 +36,7 @@
 
 ## Repo env vars
 : ${BASE_CODIR:="${JENKINS_HOME}/tools/${EXECUTOR_NUMBER}"}
+
   # OCT + OS-BUNDLES will become one repo
 : ${BUNDLE_REPO:="https://github.com/openstack-charmers/openstack-bundles"}
 : ${BUNDLE_REPO_BRANCH:="master"}
@@ -90,27 +92,27 @@ bzr export $OCT_CODIR $OCT_REPO
 
 ## Validate existince of some required files
 for _FILEDIR in $BUNDLE_CODIR/$REF_BUNDLE_FILE \
-                $BUNDLE_FILE \
-                $JW_CODIR \
-                $OCT_CODIR \
-                $BC_CODIR \
                 $BUNDLE_CODIR \
-                $CTI_CODIR; do
+                $BUNDLE_FILE \
+                $BC_CODIR \
+                $JW_CODIR \
+                $CTI_CODIR \
+                $OCT_CODIR; do
     stat -t $_FILEDIR
 done
 
 ## Add cloud if not present
 juju show-cloud $CLOUD_NAME ||\
-    # NOT YET IMPLEMENTED
+    # NOT YET IMPLEMENTED - cloud should exist in advance for now
     exit 1
 
 ## Bootstrap if not bootstrapped
 juju switch $CONTROLLER_NAME ||\
     time juju bootstrap --bootstrap-constraints="$BOOTSTRAP_CONSTRAINTS" \
-                       --auto-upgrade=false \
-                       --model-default=$CTI_CODIR/juju-configs/model-default.yaml \
-                       --config=$CTI_CODIR/juju-configs/controller-default.yaml \
-                       $CLOUD_NAME $CONTROLLER_NAME
+                        --auto-upgrade=false \
+                        --model-default=$CTI_CODIR/juju-configs/model-default.yaml \
+                        --config=$CTI_CODIR/juju-configs/controller-default.yaml \
+                        $CLOUD_NAME $CONTROLLER_NAME
 
 ## Add model if it doesn't exist
 juju switch ${CONTROLLER_NAME}:${MODEL_NAME} ||\
@@ -133,9 +135,9 @@ cd $BC_CODIR/tools/openstack-client-venv
 deactivate ||:
 tox
 . $BC_CODIR/tools/openstack-client-venv/.tox/openstack-client/bin/activate
-openstack --version
 cd $WORKSPACE
 
+openstack --version
 
 
 exit 0
