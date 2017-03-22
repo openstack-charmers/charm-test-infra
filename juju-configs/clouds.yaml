@@ -12,7 +12,7 @@ clouds:
     auth-types: [oauth1]
     endpoint: http://t.b.d/MAAS
 
-  # Mixed Architecture Lab
+  # Mixed Architecture Lab (f/k/a dellstack)
   ruxton-maas:
     type: maas
     auth-types: [oauth1]
