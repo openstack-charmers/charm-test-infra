@@ -47,14 +47,15 @@
 : ${BUNDLE_REPO:="https://github.com/openstack-charmers/openstack-bundles"}
 : ${BUNDLE_REPO_BRANCH:="master"}
 : ${BUNDLE_CODIR:="${BASE_CODIR}/openstack-bundles"}
-: ${OCT_REPO:="lp:openstack-charm-testing"}
+#: ${OCT_REPO:="lp:openstack-charm-testing"}
+: ${OCT_REPO:="lp:~1chb1n/openstack-charm-testing/update-tools-profiles"}  # WIP
 : ${OCT_CODIR:="${BASE_CODIR}/openstack-charm-testing"}
 
   # BC + CTI will become one repo
 : ${BC_REPO:="https://github.com/openstack-charmers/bot-control"}
 : ${BC_REPO_BRANCH:="master"}
 : ${BC_CODIR:="${BASE_CODIR}/bot-control"}
-: ${CTI_REPO:="https://github.com/ryan-beisner/charm-test-infra"}
+: ${CTI_REPO:="https://github.com/ryan-beisner/charm-test-infra"}  # WIP
 : ${CTI_REPO_BRANCH:="models-init-1702"}
 : ${CTI_CODIR:="${BASE_CODIR}/charm-test-infra"}
 
