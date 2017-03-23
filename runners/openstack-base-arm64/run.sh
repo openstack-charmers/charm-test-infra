@@ -151,25 +151,28 @@ openstack catalog list
 openstack service list
 openstack hypervisor list
 openstack hypervisor show 1
-openstack server list
 openstack network agent list
-openstack image list
-openstack volume list
+openstack network service provider list
 cd $WORKSPACE
 
 ## Configure
 export TEST_IMAGE_URL_XENIAL
 cd $OCT_CODIR
 $CONFIGURE_CMD
+openstack image list
+openstack subnet list
+openstack security group list
+openstack security group rule list default
 cd $WORKSPACE
-
-exit 0  # end-of-the-line at the moment
 
 ## Test
 cd $OCT_CODIR
 ./instance_launch.sh 6 xenial-uefi
+openstack server list
 cd $WORKSPACE
     # TODO: Run tempest tests
+
+exit 0  # end-of-the-line at the moment
 
 ## Collect
     # NOT YET IMPLEMENTED
