@@ -167,12 +167,13 @@ cd $WORKSPACE
 
 ## Test
 cd $OCT_CODIR
-./instance_launch.sh 6 xenial-uefi
+tools/instance_launch.sh 6 xenial-uefi
+tools/float_all.sh
 openstack server list
+# TODO: ping and ssh instances
+tools/instance_delete_all.sh
+# TODO: Run tempest tests
 cd $WORKSPACE
-    # TODO: Run tempest tests
-
-exit 0  # end-of-the-line at the moment
 
 ## Collect
     # NOT YET IMPLEMENTED
