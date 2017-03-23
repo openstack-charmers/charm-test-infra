@@ -77,7 +77,9 @@
 : ${BUNDLE_FILE:="$(mktemp /tmp/bundle.XXXXXXXXXX.yaml)"}
 : ${DEPLOY_TIMEOUT:="90m"}
 : ${DESTROY_TIMEOUT:="20m"}
-: ${WAIT_TIMEOUT:="45m"}
+: ${WAIT_TIMEOUT:="60m"}
+# Frame of reference:
+#   45m is not enough for the Gigabyte arm64 machines.
 
 ## Fixture env vars
 : ${TEST_IMAGE_URL_XENIAL:="http://10.245.161.162/swift/v1/images/xenial-server-cloudimg-arm64-uefi1.img"}
