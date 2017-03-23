@@ -76,6 +76,7 @@
 : ${REF_BUNDLE_FILE:="${BUNDLE_STABILITY}/${BUNDLE_SCENARIO}-${UBUNTU_RELEASE}-${OPENSTACK_RELEASE}/bundle.yaml"}
 : ${BUNDLE_FILE:="$(mktemp /tmp/bundle.XXXXXXXXXX.yaml)"}
 : ${DEPLOY_TIMEOUT:="90m"}
+: ${DESTROY_TIMEOUT:="20m"}
 : ${WAIT_TIMEOUT:="45m"}
 
 ## Fixture env vars
@@ -165,18 +166,25 @@ openstack security group list
 openstack security group rule list default
 cd $WORKSPACE
 
-## Test
+## Test basic instantiation and reachability
 cd $OCT_CODIR
 tools/instance_launch.sh 6 xenial-uefi
 tools/float_all.sh
 openstack server list
-# TODO: ping and ssh instances
+tools/instance_ssh_ping_all.sh
 tools/instance_delete_all.sh
-# TODO: Run tempest tests
 cd $WORKSPACE
+
+# Test with Tempest
+# TODO: Run tempest tests
 
 ## Collect
     # NOT YET IMPLEMENTED
 
 ## Destroy
     # NOT YET IMPLEMENTED
+
+## Add model if it doesn't exist
+time timeout $DESTROY_TIMEOUT juju destroy-model -y $MODEL_NAME $CLOUD_NAME
+# time timeout $DESTROY_TIMEOUT juju destroy-controller -y --destroy-all-models $CONTROLLER_NAME
+
