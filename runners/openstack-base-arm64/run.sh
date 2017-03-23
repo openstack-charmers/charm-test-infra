@@ -144,19 +144,26 @@ tox
 . $BC_CODIR/tools/openstack-client-venv/.tox/openstack-client/bin/activate
 cd $WORKSPACE
 
-openstack --version
-
-
-exit 0  # end-of-the-line at the moment
-# Will push on once the above is settled wrt env names and pivot points.
-
-
+## Source novarc creds and do very basic API validation of the cloud
+cd $OCT_CODIR
+. novarc
+openstack catalog list
+openstack service list
+openstack hypervisor list
+openstack hypervisor show 1
+openstack server list
+openstack network agent list
+openstack image list
+openstack volume list
+cd $WORKSPACE
 
 ## Configure
 export TEST_IMAGE_URL_XENIAL
 cd $OCT_CODIR
 $CONFIGURE_CMD
 cd $WORKSPACE
+
+exit 0  # end-of-the-line at the moment
 
 ## Test
 cd $OCT_CODIR
