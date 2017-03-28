@@ -184,9 +184,6 @@ cd $WORKSPACE
     # NOT YET IMPLEMENTED
 
 ## Destroy
-    # NOT YET IMPLEMENTED
-
-## Add model if it doesn't exist
-time timeout $DESTROY_TIMEOUT juju destroy-model -y $MODEL_NAME $CLOUD_NAME
+time timeout $DESTROY_TIMEOUT juju destroy-model -y ${CONTROLLER_NAME}:${MODEL_NAME}
 # time timeout $DESTROY_TIMEOUT juju destroy-controller -y --destroy-all-models $CONTROLLER_NAME
 
