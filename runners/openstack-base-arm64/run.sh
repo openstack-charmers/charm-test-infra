@@ -168,6 +168,7 @@ openstack security group list
 cd $WORKSPACE
 
 ## Test basic instantiation and reachability
+export WORKSPACE
 cd $OCT_CODIR
 tools/instance_launch.sh 6 xenial-uefi
 tools/float_all.sh
