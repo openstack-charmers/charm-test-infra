@@ -21,6 +21,9 @@
 : ${ARCH:="arm64"}
 : ${TAGS:="gigabyte"}
 : ${CLOUD_NAME:="ruxton-maas"}
+
+# XXX: Workaround for https://bugs.launchpad.net/bugs/1567807
+: ${BUNDLE_REPO_BRANCH:="automation-lp1567807"}
 # ----------------------------------------------------------------------------
 
 
