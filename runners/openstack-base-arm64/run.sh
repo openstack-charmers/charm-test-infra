@@ -48,7 +48,7 @@
 : ${BUNDLE_REPO_BRANCH:="master"}
 : ${BUNDLE_CODIR:="${BASE_CODIR}/openstack-bundles"}
 #: ${OCT_REPO:="lp:openstack-charm-testing"}
-: ${OCT_REPO:="lp:~1chb1n/openstack-charm-testing/update-tools-profiles"}  # WIP
+: ${OCT_REPO:="lp:~1chb1n/openstack-charm-testing/update-tools-1703"}  # WIP
 : ${OCT_CODIR:="${BASE_CODIR}/openstack-charm-testing"}
 
   # BC + CTI will become one repo
@@ -78,8 +78,8 @@
 : ${DEPLOY_TIMEOUT:="90m"}
 : ${DESTROY_TIMEOUT:="20m"}
 : ${WAIT_TIMEOUT:="60m"}
-# Frame of reference:
-#   45m is not enough for the Gigabyte arm64 machines.
+    # Frame of reference:
+    #   45m is not enough for the Gigabyte arm64 machines to reach ready state.
 
 ## Fixture env vars
 : ${TEST_IMAGE_URL_XENIAL:="http://10.245.161.162/swift/v1/images/xenial-server-cloudimg-arm64-uefi1.img"}
