@@ -165,7 +165,6 @@ $CONFIGURE_CMD
 openstack image list
 openstack subnet list
 openstack security group list
-openstack security group rule list default
 cd $WORKSPACE
 
 ## Test basic instantiation and reachability
