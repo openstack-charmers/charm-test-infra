@@ -17,4 +17,4 @@ export CLOUD_NAME="ruxton-maas"
 # XXX: Workaround for https://bugs.launchpad.net/bugs/1567807
 export BUNDLE_REPO_BRANCH="automation-lp1567807"
 
-./runners/ceph-base/run.sh
+ceph-base/run.sh

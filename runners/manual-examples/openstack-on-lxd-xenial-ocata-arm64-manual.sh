@@ -9,4 +9,4 @@
 export REMOTE=10.245.168.35
 export BUNDLE_FILE="bundle-ocata.yaml"
 export WORKSPACE="/tmp/WORKSPACE-IGOR"
-./runners/openstack-on-lxd/run.sh
+openstack-on-lxd/run.sh
