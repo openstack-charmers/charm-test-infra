@@ -174,6 +174,7 @@ cd $WORKSPACE
 export WORKSPACE
 cd $OCT_CODIR
 tools/instance_launch.sh 6 xenial-uefi
+tools/instance_wait.sh
 tools/float_all.sh
 openstack server list
 tools/instance_ssh_ping_all.sh
