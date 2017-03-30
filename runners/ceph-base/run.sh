@@ -10,23 +10,10 @@
 #   controller                                   ruxton-maas   available         1     48  admin   just now
 #   default                                      ruxton-maas   available         0      -  admin   1 hour ago
 #   openstack-base-xenial-newton-development-0*  ruxton-maas   available        16    144  admin   just now
-
-
+#
 # ----------------------------------------------------------------------------
-# TEMP EXAMPLE - These will come out of this file;  will be set by Jenkins.
-: ${BUNDLE_SCENARIO:="ceph-base"}
-: ${BUNDLE_STABILITY:="development"}
-: ${UBUNTU_RELEASE:="xenial"}
-: ${OPENSTACK_RELEASE:="mitaka"}
-: ${ARCH:="arm64"}
-: ${TAGS:="gigabyte"}
-: ${CLOUD_NAME:="ruxton-maas"}
-
-# XXX: Workaround for https://bugs.launchpad.net/bugs/1567807
-: ${BUNDLE_REPO_BRANCH:="automation-lp1567807"}
+# See the examples dir for usage with Jenkins and usage as a manual test case.
 # ----------------------------------------------------------------------------
-
-
 
 ## All env vars below are global generic defaults
 

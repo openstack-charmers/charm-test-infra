@@ -9,4 +9,4 @@ export REMOTE=10.245.168.57
 export BUNDLE_FILE="bundle-newton.yaml"
 export WORKSPACE="/tmp/WORKSPACE-EGEDE"
 
-./runners/openstack-on-lxd/openstack-on-lxd-runner.sh
+./runners/openstack-on-lxd/run.sh

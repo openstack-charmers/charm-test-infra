@@ -10,23 +10,10 @@
 #   controller                                   ruxton-maas   available         1     48  admin   just now
 #   default                                      ruxton-maas   available         0      -  admin   1 hour ago
 #   openstack-base-xenial-newton-development-0*  ruxton-maas   available        16    144  admin   just now
-
-
+#
 # ----------------------------------------------------------------------------
-# TEMP EXAMPLE - These will come out of this file;  will be set by Jenkins.
-: ${BUNDLE_SCENARIO:="openstack-base"}
-: ${BUNDLE_STABILITY:="development"}
-: ${UBUNTU_RELEASE:="xenial"}
-: ${OPENSTACK_RELEASE:="ocata"}
-: ${ARCH:="arm64"}
-: ${TAGS:="gigabyte"}
-: ${CLOUD_NAME:="ruxton-maas"}
-
-# XXX: Workaround for https://bugs.launchpad.net/bugs/1567807
-: ${BUNDLE_REPO_BRANCH:="automation-lp1567807"}
+# See the examples dir for usage with Jenkins and usage as a manual test case.
 # ----------------------------------------------------------------------------
-
-
 
 ## All env vars below are global generic defaults
 
@@ -50,8 +37,7 @@
 : ${BUNDLE_REPO:="https://github.com/openstack-charmers/openstack-bundles"}
 : ${BUNDLE_REPO_BRANCH:="master"}
 : ${BUNDLE_CODIR:="${BASE_CODIR}/openstack-bundles"}
-#: ${OCT_REPO:="lp:openstack-charm-testing"}
-: ${OCT_REPO:="lp:~1chb1n/openstack-charm-testing/update-tools-1703"}  # WIP
+: ${OCT_REPO:="lp:openstack-charm-testing"}
 : ${OCT_CODIR:="${BASE_CODIR}/openstack-charm-testing"}
 
   # BC + CTI will become one repo
@@ -80,9 +66,7 @@
 : ${BUNDLE_FILE:="$(mktemp /tmp/bundle.XXXXXXXXXX.yaml)"}
 : ${DEPLOY_TIMEOUT:="90m"}
 : ${DESTROY_TIMEOUT:="20m"}
-: ${WAIT_TIMEOUT:="60m"}
-    # Frame of reference:
-    #   45m is not enough for the Gigabyte arm64 machines to reach ready state.
+: ${WAIT_TIMEOUT:="45"}
 
 ## Fixture env vars
 : ${TEST_IMAGE_URL_XENIAL:="http://10.245.161.162/swift/v1/images/xenial-server-cloudimg-arm64-uefi1.img"}
@@ -190,4 +174,3 @@ cd $WORKSPACE
 ## Destroy
 time timeout $DESTROY_TIMEOUT juju destroy-model -y ${CONTROLLER_NAME}:${MODEL_NAME}
 # time timeout $DESTROY_TIMEOUT juju destroy-controller -y --destroy-all-models $CONTROLLER_NAME
-
