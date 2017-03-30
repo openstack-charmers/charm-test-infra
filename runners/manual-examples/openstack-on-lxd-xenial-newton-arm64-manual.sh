@@ -7,6 +7,6 @@
 
 # lohrmann arm64
 export REMOTE=10.245.168.36
-export BUNDLE_FILE="bundle-mitaka.yaml"
+export BUNDLE_FILE="bundle-newton.yaml"
 export WORKSPACE="/tmp/WORKSPACE-LOHRMANN"
 ./runners/openstack-on-lxd/run.sh
