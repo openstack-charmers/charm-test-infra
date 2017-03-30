@@ -84,6 +84,7 @@ EOF_CLONE_REPOS
 
 # TUNE SYSTEM
 rexec << EOF_SYSCTL_TUNE
+  echo vm.swappiness=1 | sudo tee -a /etc/sysctl.conf
   echo fs.inotify.max_queued_events=1048576 | sudo tee -a /etc/sysctl.conf
   echo fs.inotify.max_user_instances=1048576 | sudo tee -a /etc/sysctl.conf
   echo fs.inotify.max_user_watches=1048576 | sudo tee -a /etc/sysctl.conf
