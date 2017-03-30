@@ -14,7 +14,7 @@ export TAGS="gigabyte"
 export CLOUD_NAME="ruxton-maas"
 
 # 45m is not enough for the Gigabyte arm64 machines to reach ready state.
-export WAIT_TIMEOUT="75"
+export WAIT_TIMEOUT="75m"
 
 # WIP and workaround for https://bugs.launchpad.net/bugs/1567807
 export BUNDLE_REPO_BRANCH="automation-lp1567807"
