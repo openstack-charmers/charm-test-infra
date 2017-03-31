@@ -93,6 +93,19 @@ rexec << EOF_SYSCTL_TUNE
 EOF_SYSCTL_TUNE
 
 
+# DISABLE SMT ON HOST WHEN PPC64EL
+HOST_ARCH="$(rexec "uname -m")"
+if [[ "$HOST_ARCH" == *ppc64el* ]] ||\
+   [[ "$HOST_ARCH" == *ppc64le* ]] ; then
+rexec << EOF_SMT
+   sudo ppc64_cpu --smt=off
+   sudo ppc64_cpu --smt
+   sudo ppc64_cpu --info
+   sudo ppc64_cpu --frequency
+EOF_SMT
+fi
+
+
 # CREATE ZPOOL
 rexec << EOF_ZPOOL_CREATE
   sudo zpool status $ZPOOL_NAME || sudo zpool create pool0 $ZPOOL_DEVS -f
