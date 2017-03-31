@@ -9,6 +9,6 @@
 export REMOTE=10.245.168.45  # Temp IP!
 export BUNDLE_FILE="bundle-newton.yaml"
 export WORKSPACE="/tmp/WORKSPACE-HUFFMAN"
-export ZPOOL_DEVS="/dev/mpatha /dev/mpathb /dev/mpathc"  # Disk order danger!
+export ZPOOL_DEVS="/dev/sdb /dev/sdc /dev/sdd"  # Disk order danger!
 
 openstack-on-lxd/run.sh
