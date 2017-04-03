@@ -242,9 +242,11 @@ rexec << EOF_SECGROUP_CREATE
   neutron security-group-rule-create --protocol tcp --port-range-min 22 --port-range-max 22 --direction ingress default
 EOF_SECGROUP_CREATE
 
-
 # TODO: confirm connectivity to nova instances
 
 # TODO: destroy model
 
 # TODO: destroy controller
+
+
+echo "The end of $(basename $0)"

@@ -174,3 +174,6 @@ cd $WORKSPACE
 ## Destroy
 time timeout $DESTROY_TIMEOUT juju destroy-model -y ${CONTROLLER_NAME}:${MODEL_NAME}
 # time timeout $DESTROY_TIMEOUT juju destroy-controller -y --destroy-all-models $CONTROLLER_NAME
+
+echo "The end of $(basename $0)"
+
