@@ -2,7 +2,6 @@
 # OpenStack Tenant User - Juju Controller and Example Model Setup
 
 if [ -z "${OS_PROJECT_NAME}" ]; then
-  set +x
   echo "ERROR: Have you sourced novarc?"
   exit 1
 fi
