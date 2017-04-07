@@ -4,28 +4,30 @@ clouds:
   icarus-maas:
     type: maas
     auth-types: [oauth1]
-    endpoint: http://t.b.d/MAAS
+    endpoint: http://icarus-maas/MAAS
 
-  # Regression Virtual Lab (MAAS 1.x)
-  mutus-maas:
-    type: maas
-    auth-types: [oauth1]
-    endpoint: http://t.b.d/MAAS
-
-  # Mixed Architecture Lab (f/k/a dellstack)
+  # Mixed Architecture Lab (MAAS 2.x Stable, f/k/a dellstack)
   ruxton-maas:
     type: maas
     auth-types: [oauth1]
-    endpoint: http://10.245.168.6/MAAS
+    endpoint: http://ruxton-maas/MAAS
 
-  # Mixed IPv4 + IPv6 Virtual Lab
+  # Virtual Lab (MAAS >= 2.1.x)
   tiling-maas:
     type: maas
     auth-types: [oauth1]
-    endpoint: http://t.b.d/MAAS
+    endpoint: http://tiling-maas/MAAS
 
-  # Pure IPv6 Virtual Lab
+  # Regression Coverage Virtual Lab (MAAS 1.9.x)
   weyl-maas:
     type: maas
     auth-types: [oauth1]
-    endpoint: http://t.b.d/MAAS
+    endpoint: http://weyl-maas/MAAS
+
+  serverstack:
+    type: openstack
+    auth-types: [userpass]
+    endpoint: http://serverstack-keystone:5000/v3
+    regions:
+      serverstack:
+        endpoint: http://serverstack-keystone:5000/v3
