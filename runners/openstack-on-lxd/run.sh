@@ -56,6 +56,10 @@ rexec << EOF_PUBKEY_GENERATE
 EOF_PUBKEY_GENERATE
 
 
+# LEARN REMOTE CPU ARCHITECTURE
+REMOTE_ARCH="$(rexec 'uname -p' | tr -d '\r')"
+
+
 # INSTALL PACKAGES
 mkdir -vp $WORKSPACE
 if [[ -z "$(find $WORKSPACE -type f -name apt.touch -mmin +90)" ]]; then
@@ -84,12 +88,25 @@ EOF_CLONE_REPOS
 
 # TUNE SYSTEM
 rexec << EOF_SYSCTL_TUNE
+  echo vm.swappiness=1 | sudo tee -a /etc/sysctl.conf
   echo fs.inotify.max_queued_events=1048576 | sudo tee -a /etc/sysctl.conf
   echo fs.inotify.max_user_instances=1048576 | sudo tee -a /etc/sysctl.conf
   echo fs.inotify.max_user_watches=1048576 | sudo tee -a /etc/sysctl.conf
   echo vm.max_map_count=262144 | sudo tee -a /etc/sysctl.conf
   sudo sysctl -p
 EOF_SYSCTL_TUNE
+
+
+# DISABLE SMT ON HOST WHEN PPC64EL
+if [[ "$REMOTE_ARCH" == *ppc64el* ]] ||\
+   [[ "$REMOTE_ARCH" == *ppc64le* ]] ; then
+rexec << EOF_SMT
+   sudo ppc64_cpu --smt=off
+   sudo ppc64_cpu --smt
+   sudo ppc64_cpu --info
+   sudo ppc64_cpu --frequency
+EOF_SMT
+fi
 
 
 # CREATE ZPOOL
@@ -153,14 +170,21 @@ EOF_JUJU_DEPLOY_BUNDLE
 
 
 # CREATE GLANCE IMAGE
-REMOTE_ARCH="$(rexec 'uname -p' | tr -d '\r')"
 case "$REMOTE_ARCH" in
   "aarch64")
-      IMAGE_URL="http://cloud-images.ubuntu.com/xenial/current/xenial-server-cloudimg-arm64-uefi1.img"
+      #IMAGE_URL="http://cloud-images.ubuntu.com/xenial/current/xenial-server-cloudimg-arm64-uefi1.img"
+      IMAGE_URL="http://10.245.161.162/swift/v1/images/xenial-server-cloudimg-arm64-uefi1.img"
       IMAGE_PROPERTY_STRING="--property hw_firmware_type=uefi"
       ;;
+  "ppc64le")
+      IMAGE_URL="http://10.245.161.162/swift/v1/images/xenial-server-cloudimg-amd64-disk1.img"
+      ;;
+  "x86_64")
+      IMAGE_URL="http://10.245.161.162/swift/v1/images/xenial-server-cloudimg-ppc64el-disk1.img"
+      ;;
+  # TODO: add s390x
   *)
-      IMAGE_URL="http://cloud-images.ubuntu.com/xenial/current/xenial-server-cloudimg-${IMAGE_ARCH}-disk1.img"
+      IMAGE_URL="http://cloud-images.ubuntu.com/xenial/current/xenial-server-cloudimg-${REMOTE_ARCH}-disk1.img"
       ;;
 esac
 
@@ -174,7 +198,7 @@ EOF_IMAGE_CREATE
 rexec << EOF_NETWORK_CONFIGURE
   $NOVARC_CMD
   cd $REMOTE_WORKSPACE/openstack-on-lxd
-  ./neutron-ext-net -g 10.0.8.1 -c 10.0.8.0/24 -f 10.0.8.201:10.0.8.254 ext_net
+  ./neutron-ext-net --network-type flat -g 10.0.8.1 -c 10.0.8.0/24 -f 10.0.8.201:10.0.8.254 ext_net
   ./neutron-tenant-net -t admin -r provider-router -N 10.0.8.1 internal 192.168.20.0/24
   cd
 EOF_NETWORK_CONFIGURE
@@ -218,9 +242,11 @@ rexec << EOF_SECGROUP_CREATE
   neutron security-group-rule-create --protocol tcp --port-range-min 22 --port-range-max 22 --direction ingress default
 EOF_SECGROUP_CREATE
 
-
 # TODO: confirm connectivity to nova instances
 
 # TODO: destroy model
 
 # TODO: destroy controller
+
+
+echo "The end of $(basename $0)"
