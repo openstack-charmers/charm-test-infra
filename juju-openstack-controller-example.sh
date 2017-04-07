@@ -1,7 +1,14 @@
-#!/bin/bash -uex
+#!/bin/bash -e
 # OpenStack Tenant User - Juju Controller and Example Model Setup
 
-. $HOME/novarc
+if [ -z "${OS_PROJECT_NAME}" ]; then
+  set +x
+  echo "ERROR: Have you sourced novarc?"
+  exit 1
+fi
+
+set -ux
+
 export CLOUD_NAME="$OS_REGION_NAME"
 export CONTROLLER_NAME="${OS_PROJECT_NAME}-${CLOUD_NAME}"
 export MODEL_NAME=${OS_PROJECT_NAME:0:6}
