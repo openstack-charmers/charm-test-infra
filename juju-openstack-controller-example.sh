@@ -32,6 +32,8 @@ juju switch $CONTROLLER_NAME ||\
 juju switch ${CONTROLLER_NAME}:${MODEL_NAME} ||\
     juju add-model $MODEL_NAME $CLOUD_NAME
 
+# Ensure subsequent models also have contstraints set, due to bug:
+#     https://bugs.launchpad.net/juju/+bug/1653813
 juju set-model-constraints -m $MODEL_NAME "$MODEL_CONSTRAINTS"
 
 juju status --color
