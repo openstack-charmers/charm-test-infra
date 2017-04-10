@@ -10,13 +10,14 @@ set -ux
 
 export CLOUD_NAME="$OS_REGION_NAME"
 export CONTROLLER_NAME="${OS_PROJECT_NAME}-${CLOUD_NAME}"
-export MODEL_NAME=${OS_PROJECT_NAME:0:6}
+export MODEL_NAME=${OS_PROJECT_NAME:0:12}
 export BOOTSTRAP_CONSTRAINTS="virt-type=kvm cores=4 mem=8G"
 export MODEL_CONSTRAINTS="virt-type=kvm"
 
 grep ${CLOUD_NAME}-keystone juju-configs/clouds.yaml && sed -e "s#http://${CLOUD_NAME}-keystone:5000/v3#${OS_AUTH_URL}#g" -i juju-configs/clouds.yaml ||:
 
-openstack network set --enable-port-security ${OS_PROJECT_NAME}_admin_net
+# Tenant may need to do this, but disabling here, as the undercloud that required it is WIP.
+# openstack network set --enable-port-security ${OS_PROJECT_NAME}_admin_net
 
 juju add-cloud --replace $CLOUD_NAME juju-configs/clouds.yaml
 
@@ -30,6 +31,8 @@ juju switch $CONTROLLER_NAME ||\
 
 juju switch ${CONTROLLER_NAME}:${MODEL_NAME} ||\
     juju add-model $MODEL_NAME $CLOUD_NAME
+
+juju set-model-constraints -m $MODEL_NAME "$MODEL_CONSTRAINTS"
 
 juju status --color
 
