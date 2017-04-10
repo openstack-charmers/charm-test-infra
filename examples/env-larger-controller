@@ -1,0 +1,5 @@
+#!/bin/bash -uex
+# Example for overriding values ahead of the juju-openstack-controller example script
+
+export BOOTSTRAP_CONSTRAINTS="virt-type=kvm cores=4 mem=10G"
+export MODEL_CONSTRAINTS="virt-type=kvm cores=4 mem=3G root-disk=40G"
