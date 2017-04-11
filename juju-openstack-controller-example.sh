@@ -26,7 +26,7 @@ juju switch $CONTROLLER_NAME ||\
     time juju bootstrap --bootstrap-constraints "$BOOTSTRAP_CONSTRAINTS" \
                         --constraints "$MODEL_CONSTRAINTS" \
                         --auto-upgrade=false \
-                        --model-default=juju-configs/model-default.yaml \
+                        --model-default=juju-configs/model-default-serverstack.yaml \
                         --config=juju-configs/controller-default.yaml \
                         $CLOUD_NAME/$OS_REGION_NAME $CONTROLLER_NAME
 

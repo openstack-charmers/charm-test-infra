@@ -1,0 +1,11 @@
+# Model defaults from charm-test-infra
+#   https://jujucharms.com/docs/2.1/models-config
+agent-stream: proposed
+default-series: xenial
+image-stream: daily
+test-mode: true
+transmit-vendor-metrics: false
+enable-os-refresh-update: false
+enable-os-upgrade: false
+automatically-retry-hooks: false
+use-default-secgroup: true
