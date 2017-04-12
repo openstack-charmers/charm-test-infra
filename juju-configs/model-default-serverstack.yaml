@@ -8,4 +8,4 @@ transmit-vendor-metrics: false
 enable-os-refresh-update: false
 enable-os-upgrade: false
 automatically-retry-hooks: false
-use-default-secgroup: true
+#use-default-secgroup: true
