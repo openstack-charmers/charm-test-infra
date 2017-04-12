@@ -21,9 +21,11 @@ grep ${CLOUD_NAME}-keystone juju-configs/clouds.yaml && sed -e "s#http://${CLOUD
 # openstack network set --enable-port-security ${OS_PROJECT_NAME}_admin_net
 
 # Tenant may also need to do this as a work-around while the exact secgroup configuration is determined.
+# openstack security group rule create default --ingress --protocol gre
 # openstack security group rule create default --ingress --protocol icmp
 # openstack security group rule create default --ingress --protocol tcp --dst-port 1:65535
 # openstack security group rule create default --ingress --protocol udp --dst-port 1:65535
+# openstack security group rule create default --egress  --protocol gre
 # openstack security group rule create default --egress  --protocol icmp
 # openstack security group rule create default --egress --protocol tcp --dst-port 1:65535
 # openstack security group rule create default --egress --protocol udp --dst-port 1:65535
