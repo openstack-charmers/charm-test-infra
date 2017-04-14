@@ -39,6 +39,7 @@ juju switch $CONTROLLER_NAME ||\
                         --auto-upgrade=false \
                         --model-default=juju-configs/model-default-serverstack.yaml \
                         --config=juju-configs/controller-default.yaml \
+                        --config network=$NETWORK_ID \
                         $CLOUD_NAME/$OS_REGION_NAME $CONTROLLER_NAME
 
 juju switch ${CONTROLLER_NAME}:${MODEL_NAME} ||\
