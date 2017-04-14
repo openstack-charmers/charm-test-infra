@@ -11,6 +11,7 @@ set -ux
 : ${CLOUD_NAME:="$OS_REGION_NAME"}
 : ${CONTROLLER_NAME:="${OS_PROJECT_NAME}-${CLOUD_NAME}"}
 : ${MODEL_NAME:="${OS_PROJECT_NAME:0:12}"}
+: ${NETWORK_ID:=$(openstack network list | awk "/${OS_PROJECT_NAME}_admin_net/"'{ print $2 }')}
 : ${BOOTSTRAP_CONSTRAINTS:="virt-type=kvm cores=4 mem=8G"}
 : ${MODEL_CONSTRAINTS:="virt-type=kvm"}
 
@@ -41,7 +42,9 @@ juju switch $CONTROLLER_NAME ||\
                         $CLOUD_NAME/$OS_REGION_NAME $CONTROLLER_NAME
 
 juju switch ${CONTROLLER_NAME}:${MODEL_NAME} ||\
-    juju add-model $MODEL_NAME $CLOUD_NAME
+    juju add-model $MODEL_NAME $CLOUD_NAME \
+                        --config=juju-configs/model-default-serverstack.yaml \
+                        --config network=$NETWORK_ID
 
 # Ensure the model has contstraints set. Currently this must be done on every model due to bug:
 #     https://bugs.launchpad.net/juju/+bug/1653813
