@@ -1,0 +1,10 @@
+bzr
+juju-deployer
+argcomplete>=0.8.1  # Version in Xenial
+jinja2>=2.8  # Version in Xenial
+python-cinderclient>=1.0.0  # From Mojo requirements
+bzr+lp:codetree#egg=codetree
+bzr+lp:mojo#egg=mojo
+python-openstackclient
+python-neutronclient
+python-swiftclient
