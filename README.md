@@ -20,8 +20,8 @@ ________________________ summary ________________________
   congratulations :)
 ubuntu@rby:~/git/charm-test-infra⟫ . clientsrc
 (clients) ubuntu@rby:~/git/charm-test-infra⟫ openstack --version
-moopenstack 3.9.0
-j(clients) ubuntu@rby:~/git/charm-test-infra⟫ mojo --version
+openstack 3.9.0
+(clients) ubuntu@rby:~/git/charm-test-infra⟫ mojo --version
 0.4.5
 (clients) ubuntu@rby:~/git/charm-test-infra⟫
 (clients) ubuntu@rby:~/git/charm-test-infra⟫ deactivate
