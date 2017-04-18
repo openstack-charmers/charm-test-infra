@@ -45,7 +45,7 @@
 : ${BC_REPO_BRANCH:="master"}
 : ${BC_CODIR:="${BASE_CODIR}/bot-control"}
 : ${CTI_REPO:="https://github.com/ryan-beisner/charm-test-infra"}  # WIP
-: ${CTI_REPO_BRANCH:="models-init-1702"}
+: ${CTI_REPO_BRANCH:="master"}
 : ${CTI_CODIR:="${BASE_CODIR}/charm-test-infra"}
 
   # Misc other tools with no pip capability
