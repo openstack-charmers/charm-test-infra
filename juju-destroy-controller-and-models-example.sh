@@ -13,7 +13,7 @@ fi
 
 set -ux
 
-export CLOUD_NAME="$OS_REGION_NAME"
-export CONTROLLER_NAME="${OS_PROJECT_NAME}-${CLOUD_NAME}"
+: ${CLOUD_NAME:="$OS_REGION_NAME"}
+: ${CONTROLLER_NAME:="${OS_PROJECT_NAME}-${CLOUD_NAME}"}
 
 juju destroy-controller --destroy-all-models $1 $CONTROLLER_NAME
