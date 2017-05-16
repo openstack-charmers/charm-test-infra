@@ -8,3 +8,4 @@ bzr+lp:mojo#egg=mojo
 python-openstackclient
 python-neutronclient
 python-swiftclient
+babel!=2.4.0,>=2.3.4
