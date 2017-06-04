@@ -8,4 +8,4 @@
 export REMOTE=10.245.168.36 # Temp IP! lohrmann
 export BUNDLE_FILE="bundle-mitaka.yaml"
 export WORKSPACE="/tmp/WORKSPACE-$REMOTE"
-openstack-on-lxd/run.sh
+../openstack-on-lxd/run.sh

@@ -10,4 +10,4 @@ export BUNDLE_FILE="bundle-ocata.yaml"
 export WORKSPACE="/tmp/WORKSPACE-$REMOTE"
 export ZPOOL_DEVS="/dev/sdb /dev/sdc /dev/sdd /dev/sde"  # Disk order danger!
 
-openstack-on-lxd/run.sh
+../openstack-on-lxd/run.sh

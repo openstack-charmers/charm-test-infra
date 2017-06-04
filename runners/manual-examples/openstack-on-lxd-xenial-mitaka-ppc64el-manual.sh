@@ -10,4 +10,4 @@ export BUNDLE_FILE="bundle-mitaka.yaml"
 export WORKSPACE="/tmp/WORKSPACE-$REMOTE"
 export ZPOOL_DEVS="/dev/sda /dev/sdb /dev/sdc /dev/sde"  # Disk order danger!
 
-openstack-on-lxd/run.sh
+../openstack-on-lxd/run.sh
