@@ -179,10 +179,10 @@ case "$REMOTE_ARCH" in
       IMAGE_PROPERTY_STRING="--property hw_firmware_type=uefi"
       ;;
   "ppc64le")
-      IMAGE_URL="http://10.245.161.162/swift/v1/images/xenial-server-cloudimg-amd64-disk1.img"
+      IMAGE_URL="http://10.245.161.162/swift/v1/images/xenial-server-cloudimg-ppc64el-disk1.img"
       ;;
   "x86_64")
-      IMAGE_URL="http://10.245.161.162/swift/v1/images/xenial-server-cloudimg-ppc64el-disk1.img"
+      IMAGE_URL="http://10.245.161.162/swift/v1/images/xenial-server-cloudimg-amd64-disk1.img"
       ;;
   # TODO: add s390x
   *)

@@ -8,6 +8,6 @@
 export REMOTE=10.245.168.37  # Temp IP! loudred
 export BUNDLE_FILE="bundle-newton.yaml"
 export WORKSPACE="/tmp/WORKSPACE-$REMOTE"
-export ZPOOL_DEVS="/dev/sdb /dev/sdc /dev/sdd"  # Disk order danger!
+export ZPOOL_DEVS="/dev/sda /dev/sdb /dev/sdd /dev/sde"  # Disk order danger!
 
 ../openstack-on-lxd/run.sh
