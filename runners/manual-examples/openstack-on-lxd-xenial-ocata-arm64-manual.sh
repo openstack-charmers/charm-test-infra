@@ -5,8 +5,7 @@
 # Typically, the variables set here are representative of the variables
 # which would normally be passed from Jenkins jobs to the runner.
 
-# igor arm64
-export REMOTE=10.245.168.35
+export REMOTE=10.245.168.35  # Temp IP! igor
 export BUNDLE_FILE="bundle-ocata.yaml"
-export WORKSPACE="/tmp/WORKSPACE-IGOR"
+export WORKSPACE="/tmp/WORKSPACE-$REMOTE"
 openstack-on-lxd/run.sh

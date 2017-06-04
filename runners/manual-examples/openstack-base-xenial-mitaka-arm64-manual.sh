@@ -24,4 +24,4 @@ export OCT_REPO="lp:~1chb1n/openstack-charm-testing/update-tools-1703"
 
 # ----------------------------------------------------------------------------
 
-openstack-base/run.sh
+../openstack-base/run.sh

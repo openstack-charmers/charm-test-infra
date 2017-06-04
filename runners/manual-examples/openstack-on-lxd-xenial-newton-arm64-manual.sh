@@ -5,8 +5,7 @@
 # Typically, the variables set here are representative of the variables
 # which would normally be passed from Jenkins jobs to the runner.
 
-# lohrmann arm64
-export REMOTE=10.245.168.36
+export REMOTE=10.245.168.36  # Temp IP! lohrmann
 export BUNDLE_FILE="bundle-newton.yaml"
-export WORKSPACE="/tmp/WORKSPACE-LOHRMANN"
+export WORKSPACE="/tmp/WORKSPACE-$REMOTE"
 openstack-on-lxd/run.sh

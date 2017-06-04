@@ -13,7 +13,9 @@
 [[ -z "$REMOTE" ]] && export REMOTE="n.n.n.n"
 [[ -z "$BUNDLE_FILE" ]] && export BUNDLE_FILE="bundle-mitaka.yaml"
 
-[[ -z "$OS_CLIENT_UCA" ]] && export OS_CLIENT_UCA="newton"
+# Generally, use the latest client for all prior releases.
+[[ -z "$OS_CLIENT_UCA" ]] && export OS_CLIENT_UCA="ocata"
+
 [[ -z "$REMOTE_WORKSPACE" ]] && export REMOTE_WORKSPACE="/home/ubuntu/WORKSPACE"
 [[ -z "$REMOTE_USER" ]] && export REMOTE_USER=ubuntu
 [[ -z "$ZPOOL_NAME" ]] && export ZPOOL_NAME=pool0
