@@ -1,5 +1,5 @@
 bzr
-bzr+lp:~james-page/juju-deployer/terminate-machine-0
+bzr+lp:~james-page/juju-deployer/terminate-machine-0#egg=juju-deployer
 # juju-deployer  # Disabled, pending https://bugs.launchpad.net/charm-test-infra/+bug/1713949
 websocket-client!=0.44.0  # https://bugs.launchpad.net/mojo/+bug/1713871
 argcomplete>=0.8.1  # Version in Xenial
