@@ -1,5 +1,6 @@
 bzr
-juju-deployer
+bzr+lp:~james-page/juju-deployer/terminate-machine-0
+# juju-deployer  # Disabled, pending https://bugs.launchpad.net/charm-test-infra/+bug/1713949
 argcomplete>=0.8.1  # Version in Xenial
 jinja2>=2.8  # Version in Xenial
 python-cinderclient>=1.0.0  # From Mojo requirements
