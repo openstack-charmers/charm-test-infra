@@ -16,7 +16,7 @@ set -ux
 : ${CLOUD_NAME:="$OS_REGION_NAME"}
 : ${CONTROLLER_NAME:="${OS_PROJECT_NAME}-${CLOUD_NAME}"}
 
-if ! juju controllers | grep 'auto-osci-sv07.*superuser'; then
+if ! juju controllers | grep "$CONTROLLER_NAME.*superuser"; then
     exit 0
 fi
 
