@@ -4,7 +4,7 @@
 . ~/novarc
 . ~/oscirc
 
-bundle=$HOME/temp/openstack-bundles/development/openstack-refstack-xenial-ocata/bundle.yaml
+bundle=$HOME/temp/openstack-bundles/development/openstack-refstack-xenial-ocata-ppc64el-alt/bundle.yaml
 bundle_tmp=$(mktemp)
 sed -e "s#eno2#enP3p9s0f1#g" $bundle > $bundle_tmp
 grep data-port $bundle_tmp
