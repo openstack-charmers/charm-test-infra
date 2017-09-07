@@ -1,0 +1,1 @@
+deploy-amd64.sh
