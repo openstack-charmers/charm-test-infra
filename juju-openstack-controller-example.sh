@@ -14,6 +14,8 @@ set -ux
 : ${NETWORK_ID:=$(openstack network list | awk "/${OS_PROJECT_NAME}_admin_net/"'{ print $2 }')}
 : ${BOOTSTRAP_CONSTRAINTS:="virt-type=kvm cores=4 mem=8G"}
 : ${MODEL_CONSTRAINTS:="virt-type=kvm"}
+: ${WORKSPACE:="/tmp"}
+
 
 grep ${CLOUD_NAME}-keystone juju-configs/clouds.yaml && sed -e "s#http://${CLOUD_NAME}-keystone:5000/v3#${OS_AUTH_URL}#g" -i juju-configs/clouds.yaml ||:
 
@@ -51,8 +53,11 @@ juju switch ${CONTROLLER_NAME}:${MODEL_NAME} ||\
 
 # Ensure the model has contstraints set. Currently this must be done on every model due to bug:
 #     https://bugs.launchpad.net/juju/+bug/1653813
+juju models --format json &> $WORKSPACE/juju-models-before-constraints.json.txt
 juju set-model-constraints -m $MODEL_NAME "$MODEL_CONSTRAINTS"
 
+juju controllers
+juju models
 juju status --color
 
 # EXAMPLE OUTPUT: results with serverstack osci user

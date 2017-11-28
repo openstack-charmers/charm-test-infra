@@ -14,6 +14,7 @@ set -ux
 : ${CONTROLLER_NAME:="${OS_PROJECT_NAME}-${CLOUD_NAME}"}
 : ${MODEL_NAME:="${OS_PROJECT_NAME:0:12}-${CLOUD_NAME}"}
 : ${BOOTSTRAP_CONSTRAINTS:="arch=amd64 tags=dell"}
+: ${BOOTSTRAP_PLACEMENT:=""}
 : ${MODEL_CONSTRAINTS:="arch=amd64 tags=dell"}
 
 # XXX: Must edit credentials.yaml locally in advance to populate oauth(s)
@@ -26,6 +27,7 @@ juju switch $CONTROLLER_NAME ||\
                         --auto-upgrade=false \
                         --model-default=juju-configs/model-default.yaml \
                         --config=juju-configs/controller-default.yaml \
+                        $BOOTSTRAP_PLACEMENT \
                         $CLOUD_NAME $CONTROLLER_NAME
 
 juju switch ${CONTROLLER_NAME}:${MODEL_NAME} ||\

@@ -1,8 +1,11 @@
 bzr
-juju-deployer
+bzr+lp:~james-page/juju-deployer/terminate-machine-0#egg=juju-deployer
+# juju-deployer  # Disabled, pending https://bugs.launchpad.net/charm-test-infra/+bug/1713949
+websocket-client!=0.44.0  # https://bugs.launchpad.net/mojo/+bug/1713871
 argcomplete>=0.8.1  # Version in Xenial
 jinja2>=2.8  # Version in Xenial
 python-cinderclient>=1.0.0  # From Mojo requirements
+setuptools==36.4.0  # For Mojo
 bzr+lp:codetree#egg=codetree
 bzr+lp:mojo#egg=mojo
 distro-info
@@ -10,3 +13,4 @@ python-openstackclient
 python-neutronclient
 python-swiftclient
 babel!=2.4.0,>=2.3.4
+paramiko  # For mojo_os_utils
