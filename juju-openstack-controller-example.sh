@@ -44,6 +44,8 @@ juju switch $CONTROLLER_NAME ||\
                         --config network=$NETWORK_ID \
                         $CLOUD_NAME/$OS_REGION_NAME $CONTROLLER_NAME
 
+juju model-defaults network=$NETWORK_ID
+
 juju switch ${CONTROLLER_NAME}:${MODEL_NAME} ||\
     juju add-model $MODEL_NAME $CLOUD_NAME \
                         --config=juju-configs/model-default-serverstack.yaml \

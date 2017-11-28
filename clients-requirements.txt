@@ -8,6 +8,7 @@ python-cinderclient>=1.0.0  # From Mojo requirements
 setuptools==36.4.0  # For Mojo
 bzr+lp:codetree#egg=codetree
 bzr+lp:mojo#egg=mojo
+distro-info
 python-openstackclient
 python-neutronclient
 python-swiftclient
