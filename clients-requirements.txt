@@ -9,6 +9,8 @@ setuptools==36.4.0  # For Mojo
 bzr+lp:codetree#egg=codetree
 bzr+lp:mojo#egg=mojo
 distro-info
+dnspython
+python-designateclient
 python-openstackclient
 python-neutronclient
 python-swiftclient
