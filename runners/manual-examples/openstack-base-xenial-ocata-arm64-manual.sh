@@ -17,7 +17,7 @@ export CLOUD_NAME="ruxton-maas"
 export WAIT_TIMEOUT="75m"
 
 # WIP and workaround for https://bugs.launchpad.net/bugs/1567807
-export BUNDLE_REPO_BRANCH="automation-lp1567807"
+# export BUNDLE_REPO_BRANCH="automation-lp1567807"
 
 # WIP post-deploy tools
 export OCT_REPO="lp:~1chb1n/openstack-charm-testing/update-tools-1703"
