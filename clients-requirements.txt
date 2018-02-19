@@ -14,5 +14,6 @@ python-designateclient
 python-openstackclient
 python-neutronclient
 python-swiftclient
+aodhclient
 babel!=2.4.0,>=2.3.4
 paramiko  # For mojo_os_utils
