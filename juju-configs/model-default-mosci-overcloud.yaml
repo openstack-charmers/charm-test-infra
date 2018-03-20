@@ -1,8 +1,8 @@
 # Model defaults from charm-test-infra
 #   https://jujucharms.com/docs/2.1/models-config
-agent-stream: devel 
+# agent-stream: proposed
 default-series: xenial
-image-stream: daily
+# image-stream: daily
 test-mode: true
 transmit-vendor-metrics: false
 # https://bugs.launchpad.net/juju/+bug/1685351
@@ -10,3 +10,4 @@ transmit-vendor-metrics: false
 enable-os-upgrade: false
 automatically-retry-hooks: false
 use-default-secgroup: true
+use-floating-ip: true
