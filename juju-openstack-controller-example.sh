@@ -12,7 +12,7 @@ set -ux
 : ${CONTROLLER_NAME:="${OS_PROJECT_NAME}-${CLOUD_NAME}"}
 : ${MODEL_NAME:="${OS_PROJECT_NAME:0:12}"}
 : ${NETWORK_ID:=$(openstack network list | awk "/${OS_PROJECT_NAME}_admin_net/"'{ print $2 }')}
-: ${BOOTSTRAP_CONSTRAINTS:="virt-type=kvm cores=4 mem=8G"}
+: ${BOOTSTRAP_CONSTRAINTS:="virt-type=kvm instance-type=m1.safecache.large"}
 : ${MODEL_CONSTRAINTS:="virt-type=kvm"}
 : ${WORKSPACE:="/tmp"}
 
