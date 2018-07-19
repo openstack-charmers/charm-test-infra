@@ -28,4 +28,3 @@ python-keystoneclient
 python-neutronclient
 python-novaclient
 python-swiftclient
-
