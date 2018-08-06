@@ -1,19 +1,30 @@
+# Zaza
+git+https://github.com/openstack-charmers/zaza.git#egg=zaza
+
+# Mojo
 juju-deployer
 websocket-client!=0.44.0  # https://bugs.launchpad.net/mojo/+bug/1713871
 argcomplete>=0.8.1  # Version in Xenial
 jinja2>=2.8  # Version in Xenial
-python-cinderclient>=1.0.0  # From Mojo requirements
 setuptools==36.4.0  # For Mojo
 bzr+lp:codetree#egg=codetree
 # bzr+lp:mojo#egg=mojo # disabled for our working branch on py3
 bzr+lp:~ost-maintainers/mojo/py3#egg=mojo
-cmd2!=0.8.3,<0.9.0  # MIT
+cmd2!=0.8.3  # MIT
 distro-info
 dnspython
-aodhclient
-python-designateclient
-python-openstackclient
-python-neutronclient
-python-swiftclient
 babel!=2.4.0,>=2.3.4
 paramiko  # For mojo_os_utils
+
+# OpenStack
+python-openstackclient>=3.14.0
+aodhclient
+python-designateclient
+python-ceilometerclient
+python-cinderclient
+python-glanceclient
+python-heatclient
+python-keystoneclient
+python-neutronclient
+python-novaclient
+python-swiftclient

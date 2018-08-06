@@ -29,5 +29,5 @@ clouds:
     auth-types: [userpass]
     endpoint: http://serverstack-keystone:5000/v3
     regions:
-      RegionOne:
+      serverstack:
         endpoint: http://serverstack-keystone:5000/v3

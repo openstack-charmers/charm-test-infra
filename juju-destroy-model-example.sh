@@ -18,6 +18,9 @@ set -ux
 : ${CONTROLLER_NAME:="${OS_PROJECT_NAME}-${CLOUD_NAME}"}
 : ${MODEL_NAME:="${OS_PROJECT_NAME:0:12}"}
 
-juju switch ${CONTROLLER_NAME}:${MODEL_NAME} &&\
-    juju destroy-model $1 ${CONTROLLER_NAME}:${MODEL_NAME} ||\
-        echo "Controller:Model not found (${CONTROLLER_NAME}:${MODEL_NAME})"
+juju switch ${CONTROLLER_NAME}:${MODEL_NAME} || \
+    echo "Controller:Model not found (${CONTROLLER_NAME}:${MODEL_NAME})"
+
+if ! timeout 1200 juju destroy-model --destroy-storage $1 ${CONTROLLER_NAME}:${MODEL_NAME}; then
+    juju kill-controller $1 $CONTROLLER_NAME
+fi

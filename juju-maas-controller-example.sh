@@ -19,7 +19,7 @@ set -ux
 
 # XXX: Must edit credentials.yaml locally in advance to populate oauth(s)
 juju add-cloud --replace $CLOUD_NAME juju-configs/clouds.yaml
-#juju add-credential --replace $CLOUD_NAME -f juju-configs/credentials.yaml
+juju add-credential --replace $CLOUD_NAME -f juju-configs/credentials.yaml
 
 juju switch $CONTROLLER_NAME ||\
     time juju bootstrap --bootstrap-constraints "$BOOTSTRAP_CONSTRAINTS" \
