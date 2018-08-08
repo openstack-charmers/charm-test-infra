@@ -6,6 +6,6 @@ image-stream: daily
 test-mode: true
 transmit-vendor-metrics: false
 # https://bugs.launchpad.net/juju/+bug/1685351
-# enable-os-refresh-update: false
+enable-os-refresh-update: true
 enable-os-upgrade: false
 automatically-retry-hooks: false
