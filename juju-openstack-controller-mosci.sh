@@ -22,7 +22,7 @@ CLOUD_NAME="overcloud"
 : ${WORKSPACE:="/tmp"}
 
 
-grep overcloud-keystone juju-configs/clouds.yaml && sed -e "s#http://overcloud-keystone:5000/v3#${OS_AUTH_URL}#g" -i juju-configs/clouds.yaml ||:
+grep serverstack-keystone juju-configs/clouds.yaml && sed -e "s#http://serverstack-keystone:5000/v3#${OS_AUTH_URL}#g" -i juju-configs/clouds.yaml ||:
 
 if [ ! -d ~/simplestreams/images ] ; then
         mkdir -p ~/simplestreams/images
