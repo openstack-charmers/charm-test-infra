@@ -21,6 +21,4 @@ set -ux
 juju switch ${CONTROLLER_NAME}:${MODEL_NAME} || \
     echo "Controller:Model not found (${CONTROLLER_NAME}:${MODEL_NAME})"
 
-if ! timeout 1200 juju destroy-model --destroy-storage $1 ${CONTROLLER_NAME}:${MODEL_NAME}; then
-    juju kill-controller $1 $CONTROLLER_NAME
-fi
+juju destroy-model --destroy-storage $1 ${CONTROLLER_NAME}:${MODEL_NAME}
