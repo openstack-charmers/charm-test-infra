@@ -1,6 +1,9 @@
 # Zaza
 git+https://github.com/openstack-charmers/zaza.git#egg=zaza
 
+# Juju crashdump
+git+https://github.com/juju/juju-crashdump.git#egg=juju-crashdump
+
 # Mojo
 juju-deployer
 websocket-client!=0.44.0  # https://bugs.launchpad.net/mojo/+bug/1713871
