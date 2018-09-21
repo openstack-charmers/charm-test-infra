@@ -16,7 +16,7 @@ clouds:
   amontons-maas:
     type: maas
     auth-types: [oauth1]
-    endpoint: http://amontons-maas/MAAS
+    endpoint: http://amontons-maas:5240/MAAS
 
   # Virtual Lab (MAAS >= 2.1.x)
   tiling-maas:
