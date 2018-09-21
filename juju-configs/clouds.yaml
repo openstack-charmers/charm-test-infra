@@ -12,11 +12,11 @@ clouds:
     auth-types: [oauth1]
     endpoint: http://ruxton-maas/MAAS
 
-  # Vlads mixed virtual MAAS
-  virtual-maas:
+  # Amontons Virtual MAAS
+  amontons-maas:
     type: maas
     auth-types: [oauth1]
-    endpoint: http://virtual-maas/MAAS
+    endpoint: http://amontons-maas/MAAS
 
   # Virtual Lab (MAAS >= 2.1.x)
   tiling-maas:
