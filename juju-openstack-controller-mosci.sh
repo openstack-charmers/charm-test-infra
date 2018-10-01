@@ -12,7 +12,7 @@ fi
 
 set -ux
 
-: ${OS_SERIES:="xenial"}
+: ${OS_SERIES:="bionic"}
 CLOUD_NAME="overcloud"
 : ${CONTROLLER_NAME:="${OS_PROJECT_NAME}-${CLOUD_NAME}"}
 : ${MODEL_NAME:="${OS_PROJECT_NAME:0:12}"}
@@ -28,7 +28,7 @@ if [ ! -d ~/simplestreams/images ] ; then
         mkdir -p ~/simplestreams/images
 fi
 
-IMAGE_ID=$(openstack image list | grep -v cirros | awk /xenial/'{print $2}')
+IMAGE_ID=$(openstack image list | grep -v cirros | awk /bionic/'{print $2}')
 
 juju switch ${OVERCLOUD_NAME}:${OVERCLOUD_NAME}
 juju metadata generate-image -d ~/simplestreams -i ${IMAGE_ID} -s ${OS_SERIES} -r RegionOne -u $OS_AUTH_URL -a ${ARCH}
