@@ -30,7 +30,7 @@ juju switch $CONTROLLER_NAME ||\
                         $BOOTSTRAP_PLACEMENT \
                         $CLOUD_NAME $CONTROLLER_NAME
 
-juju switch ${CONTROLLER_NAME}:${MODEL_NAME} ||\
+juju show-model ${CONTROLLER_NAME}:${MODEL_NAME} ||\
     juju add-model $MODEL_NAME $CLOUD_NAME \
                         --config=juju-configs/model-default.yaml
 
