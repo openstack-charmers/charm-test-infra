@@ -38,7 +38,7 @@ clouds:
       serverstack:
         endpoint: http://serverstack-keystone:5000/v3
 
-  remote-lxd:
+  lxd-remote:
     type: lxd
-    auth-types: [certificate]
+    auth-types: [interactive]
     endpoint: https://__ENDPOINT_LXD__:8443
