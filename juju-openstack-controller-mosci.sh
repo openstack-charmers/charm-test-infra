@@ -30,7 +30,8 @@ fi
 
 IMAGE_ID=$(openstack image list | grep -v cirros | awk /bionic/'{print $2}')
 
-juju switch ${OVERCLOUD_NAME}:${OVERCLOUD_NAME}
+#juju switch ${OVERCLOUD_NAME}:${OVERCLOUD_NAME}
+CONMOD="${OVERCLOUD_NAME-${OVERCLOUD_NAME}"
 juju metadata generate-image -d ~/simplestreams -i ${IMAGE_ID} -s ${OS_SERIES} -r RegionOne -u $OS_AUTH_URL -a ${ARCH}
 
 
