@@ -42,6 +42,10 @@ else
         BOOT_NAME=$CLOUD_NAME
 fi
 
+if [[ ${CLOUD_NAME} == 'lxd' ]]; then
+        BOOT_NAME="${CLOUD_NAME}-${LXD_IP}"
+fi
+
 juju switch $CONTROLLER_NAME ||\
     time juju bootstrap --bootstrap-constraints "$BOOTSTRAP_CONSTRAINTS" \
                         --auto-upgrade=false \
