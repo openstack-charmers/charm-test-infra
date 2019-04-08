@@ -30,6 +30,10 @@ else
         S390X=false
 fi
 
+if [[ ${CLOUD_NAME} == 'lxd' ]]; then
+        CLOUD_NAME="${CLOUD_NAME}-${LXD_IP//./-}"
+fi
+
 # XXX: Must edit credentials.yaml locally in advance to populate oauth(s)
 if [[ ${S390X} != true ]]; then
 juju add-cloud --replace $CLOUD_NAME juju-configs/clouds.yaml
@@ -40,10 +44,6 @@ if [[ ${S390X} == 'true' ]] || [[ ${BOOTSTRAP_LOCAL} == 'true' ]]; then
         BOOT_NAME="manual/${OPENSTACK_PUBLIC_IP}"
 else
         BOOT_NAME=$CLOUD_NAME
-fi
-
-if [[ ${CLOUD_NAME} == 'lxd' ]]; then
-        BOOT_NAME="${CLOUD_NAME}-${LXD_IP}"
 fi
 
 juju switch $CONTROLLER_NAME ||\
