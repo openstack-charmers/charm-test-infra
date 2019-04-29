@@ -2,7 +2,8 @@
 git+https://github.com/openstack-charmers/zaza.git#egg=zaza
 
 # Juju crashdump
-git+https://github.com/juju/juju-crashdump.git#egg=juju-crashdump
+# pin commit to work around https://github.com/juju/juju-crashdump/issues/34
+git+https://github.com/juju/juju-crashdump.git@dba9ff0e6d71d25d37d9011d032d5fcc1af21c5c#egg=juju-crashdump
 
 # Mojo
 juju-deployer
