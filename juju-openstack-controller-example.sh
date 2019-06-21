@@ -33,7 +33,7 @@ grep ${CLOUD_NAME}-keystone juju-configs/clouds.yaml && sed -e "s#http://${CLOUD
 # openstack security group rule create default --egress --protocol tcp --dst-port 1:65535
 # openstack security group rule create default --egress --protocol udp --dst-port 1:65535
 
-juju add-cloud --replace $CLOUD_NAME juju-configs/clouds.yaml
+juju add-cloud --replace $CLOUD_NAME --local juju-configs/clouds.yaml
 
 juju switch $CONTROLLER_NAME ||\
     time juju bootstrap --bootstrap-constraints "$BOOTSTRAP_CONSTRAINTS" \
