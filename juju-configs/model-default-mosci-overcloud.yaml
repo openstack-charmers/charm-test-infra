@@ -1,11 +1,13 @@
 # Model defaults from charm-test-infra
 #   https://jujucharms.com/docs/2.1/models-config
-agent-stream: proposed
+# agent-stream: proposed
 default-series: bionic
-image-stream: daily
+# image-stream: daily
 test-mode: true
 transmit-vendor-metrics: false
 # https://bugs.launchpad.net/juju/+bug/1685351
-enable-os-refresh-update: true
+enable-os-refresh-update: true 
 enable-os-upgrade: false
 automatically-retry-hooks: false
+use-default-secgroup: true
+use-floating-ip: true

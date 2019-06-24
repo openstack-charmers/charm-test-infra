@@ -2,4 +2,4 @@
 #   https://jujucharms.com/docs/2.1/controllers-creating
 #   https://jujucharms.com/docs/2.1/controllers
 bootstrap-timeout: 1200
-default-series: xenial
+default-series: bionic
