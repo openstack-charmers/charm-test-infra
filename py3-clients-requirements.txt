@@ -1,6 +1,6 @@
 # Zaza
 git+https://github.com/openstack-charmers/zaza.git#egg=zaza
-git+https://github.com/openstack-charmers/zaza-openstack-tests.git#egg=egg=zaza.openstack
+git+https://github.com/openstack-charmers/zaza-openstack-tests.git#egg=zaza.openstack
 
 # Juju crashdump
 # pin commit to work around https://github.com/juju/juju-crashdump/issues/34
