@@ -1,18 +1,17 @@
 #!/bin/bash -uex
 # Example:  Juju Controller on MAAS Provider and Example Model Setup
 # Must update juju-configs/credentials.yaml with your MAAS oauth key
-#           Also see for usage:  virt-controller-icarus-example.sh
+# Also see for usage:  virt-controller-icarus-example.sh
 
-: ${OS_PROJECT_NAME:="$(pwgen -A0B 8 -n 1)"}
-: ${CLOUD_NAME:="${OS_PROJECT_NAME}-maas"}
-: ${CONTROLLER_NAME:="${OS_PROJECT_NAME}-${CLOUD_NAME}"}
-: ${MODEL_NAME:="${OS_PROJECT_NAME:0:12}-${CLOUD_NAME}"}
+: ${CONTROLLER_NAME:="${CLOUD_NAME}"}
+: ${MODEL_NAME:="default"}
 : ${BOOTSTRAP_CONSTRAINTS:="arch=amd64 tags=dell"}
 : ${BOOTSTRAP_PLACEMENT:=""}
 : ${MODEL_CONSTRAINTS:="arch=amd64 tags=dell"}
 
-# XXX: Must edit credentials.yaml locally in advance to populate oauth(s)
-juju add-cloud --replace $CLOUD_NAME juju-configs/clouds.yaml
+juju add-cloud $CLOUD_NAME juju-configs/clouds.yaml ||\
+    juju update-cloud $CLOUD_NAME -f juju-configs/clouds.yaml
+
 juju add-credential --replace $CLOUD_NAME -f juju-configs/credentials.yaml
 
 juju switch $CONTROLLER_NAME ||\
