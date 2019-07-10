@@ -1,24 +1,22 @@
-#!/bin/bash -e
+#!/bin/bash -uex
 # Example:  Juju Controller on MAAS Provider and Example Model Setup
+# ============================================================================
+# Expects CLOUD_NAME to be set in advance, and CLOUD_NAME should match
+# one of the clouds defined in the clouds.yaml and credentials.yaml files.
+# Further, you must update juju-configs/credentials.yaml with your MAAS
+# oauth key prior to usage.
+#
+# For example usage, see:  virt-controller-icarus-example.sh
 
-# novarc values for other clouds are used to construct model/controller names
-# The undercloud novarc has no other purpose here.
-if [ -z "${OS_PROJECT_NAME}" ]; then
-  echo "ERROR: Have you sourced novarc?"
-  exit 1
-fi
-
-set -ux
-
-: ${CLOUD_NAME:="${OS_PROJECT_NAME}-maas"}
-: ${CONTROLLER_NAME:="${OS_PROJECT_NAME}-${CLOUD_NAME}"}
-: ${MODEL_NAME:="${OS_PROJECT_NAME:0:12}-${CLOUD_NAME}"}
+: ${CONTROLLER_NAME:="${CLOUD_NAME}"}
+: ${MODEL_NAME:="default"}
 : ${BOOTSTRAP_CONSTRAINTS:="arch=amd64 tags=dell"}
 : ${BOOTSTRAP_PLACEMENT:=""}
 : ${MODEL_CONSTRAINTS:="arch=amd64 tags=dell"}
 
-# XXX: Must edit credentials.yaml locally in advance to populate oauth(s)
-juju add-cloud --replace $CLOUD_NAME juju-configs/clouds.yaml
+juju add-cloud $CLOUD_NAME juju-configs/clouds.yaml ||\
+    juju update-cloud $CLOUD_NAME -f juju-configs/clouds.yaml
+
 juju add-credential --replace $CLOUD_NAME -f juju-configs/credentials.yaml
 
 juju switch $CONTROLLER_NAME ||\
@@ -40,33 +38,32 @@ juju set-model-constraints -m $MODEL_NAME "$MODEL_CONSTRAINTS"
 
 juju status --color
 
-# EXAMPLE OUTPUT: results with serverstack osci user
+# EXAMPLE OUTPUT:
+# ubuntu@foo-bastion:~/charm-test-infraâŸ« juju clouds
+# Cloud           Regions  Default          Type        Description
+# aws                  15  us-east-1        ec2         Amazon Web Services
+# aws-china             2  cn-north-1       ec2         Amazon China
+# aws-gov               1  us-gov-west-1    ec2         Amazon (USA Government)
+# azure                27  centralus        azure       Microsoft Azure
+# azure-china           2  chinaeast        azure       Microsoft Azure China
+# cloudsigma           12  dub              cloudsigma  CloudSigma Cloud
+# google               18  us-east1         gce         Google Cloud Platform
+# joyent                6  us-east-1        joyent      Joyent Cloud
+# oracle                4  us-phoenix-1     oci         Oracle Cloud Infrastructure
+# oracle-classic        5  uscom-central-1  oracle      Oracle Cloud Infrastructure Classic
+# rackspace             6  dfw              rackspace   Rackspace Cloud
+# localhost             1  localhost        lxd         LXD Container Hypervisor
+# icarus-maas           0                   maas        Metal As A Service
 #
-# jenkins@juju-10f68a-osci-15:~/temp/charm-test-infra$ juju clouds
-# Cloud        Regions  Default        Type        Description
-# aws               14  us-east-1      ec2         Amazon Web Services
-# aws-china          1  cn-north-1     ec2         Amazon China
-# aws-gov            1  us-gov-west-1  ec2         Amazon (USA Government)
-# azure             24  centralus      azure       Microsoft Azure
-# azure-china        2  chinaeast      azure       Microsoft Azure China
-# cloudsigma         5  hnl            cloudsigma  CloudSigma Cloud
-# google             6  us-east1       gce         Google Cloud Platform
-# joyent             6  eu-ams-1       joyent      Joyent Cloud
-# rackspace          6  dfw            rackspace   Rackspace Cloud
-# localhost          1  localhost      lxd         LXD Container Hypervisor
-# ruxton-maas        0                 maas        Metal As A Service
+# ubuntu@foo-bastion:~/charm-test-infraâŸ« juju controllers
+# Use --refresh option with this command to see the latest information.
 #
-# jenkins@juju-10f68a-osci-15:~/temp/charm-test-infra$ juju controllers
-# Use --refresh flag with this command to see the latest information.
+# Controller    Model    User   Access     Cloud/Region  Models  Nodes    HA  Version
+# icarus-maas*  default  admin  superuser  icarus-maas        2      1  none  2.6.6
 #
-# Controller         Model             User   Access     Cloud/Region             Models  Machines    HA  Version
-# auto-osci-lb00     -                 admin  superuser  serverstack/serverstack       2         1  none  2.1.2
-# osci-ruxton-maas*  osci-ruxton-maas  admin  superuser  ruxton-maas                   2         1  none  2.1.2
+# ubuntu@foo-bastion:~/charm-test-infraâŸ« juju models
+# Controller: icarus-maas
 #
-# jenkins@juju-10f68a-osci-15:~/temp/charm-test-infra$ juju models
-# Controller: osci-ruxton-maas
-#
-# Model              Cloud/Region  Status     Machines  Cores  Access  Last connection
-# controller         ruxton-maas   available         1      8  admin   just now
-# default            ruxton-maas   available         0      -  admin   10 hours ago
-# osci-ruxton-maas*  ruxton-maas   available        19     56  admin   12 seconds ago
+# Model       Cloud/Region  Type  Status     Machines  Cores  Access  Last connection
+# controller  icarus-maas   maas  available         1      2  admin   just now
+# default*    icarus-maas   maas  available         0      -  admin   2 seconds ago
