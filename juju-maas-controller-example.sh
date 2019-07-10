@@ -1,7 +1,12 @@
 #!/bin/bash -uex
 # Example:  Juju Controller on MAAS Provider and Example Model Setup
-# Must update juju-configs/credentials.yaml with your MAAS oauth key
-# Also see for usage:  virt-controller-icarus-example.sh
+# ============================================================================
+# Expects CLOUD_NAME to be set in advance, and CLOUD_NAME should match
+# one of the clouds defined in the clouds.yaml and credentials.yaml files.
+# Further, you must update juju-configs/credentials.yaml with your MAAS
+# oauth key prior to usage.
+#
+# For example usage, see:  virt-controller-icarus-example.sh
 
 : ${CONTROLLER_NAME:="${CLOUD_NAME}"}
 : ${MODEL_NAME:="default"}
@@ -53,13 +58,12 @@ juju status --color
 # ubuntu@foo-bastion:~/charm-test-infraâŸ« juju controllers
 # Use --refresh option with this command to see the latest information.
 #
-# Controller             Model                 User   Access     Cloud/Region  Models  Machines    HA  Version
-# yachaik7-icarus-maas*  yachaik7-icarus-maas  admin  superuser  icarus-maas        3         1  none  2.5.5
+# Controller    Model    User   Access     Cloud/Region  Models  Nodes    HA  Version
+# icarus-maas*  default  admin  superuser  icarus-maas        2      1  none  2.6.6
 #
 # ubuntu@foo-bastion:~/charm-test-infraâŸ« juju models
-# Controller: yachaik7-icarus-maas
+# Controller: icarus-maas
 #
-# Model                  Cloud/Region  Type  Status     Machines  Cores  Access  Last connection
-# controller             icarus-maas   maas  available         1      8  admin   just now
-# default                icarus-maas   maas  available         0      -  admin   1 minute ago
-# yachaik7-icarus-maas*  icarus-maas   maas  available         0      -  admin   1 minute ago
+# Model       Cloud/Region  Type  Status     Machines  Cores  Access  Last connection
+# controller  icarus-maas   maas  available         1      2  admin   just now
+# default*    icarus-maas   maas  available         0      -  admin   2 seconds ago

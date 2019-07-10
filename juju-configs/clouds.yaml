@@ -1,3 +1,6 @@
+# Expects that the hostnames are resolvable from your client machine. It may be
+# necessary to add /etc/hosts entries in your machine, or change the yaml
+# contents to the IP address.
 clouds:
 
   # Telco-Grade + Low-Latency Lab
