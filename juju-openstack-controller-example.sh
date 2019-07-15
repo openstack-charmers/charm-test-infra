@@ -35,7 +35,7 @@ grep ${CLOUD_NAME}-keystone juju-configs/clouds.yaml && sed -e "s#http://${CLOUD
 
 juju add-cloud --replace $CLOUD_NAME juju-configs/clouds.yaml
 
-juju switch $CONTROLLER_NAME ||\
+juju switch $CONTROLLER_NAME && timeout 15 juju show-controller $CONTROLLER_NAME ||\
     time juju bootstrap --bootstrap-constraints "$BOOTSTRAP_CONSTRAINTS" \
                         --constraints "$MODEL_CONSTRAINTS" \
                         --auto-upgrade=false \
