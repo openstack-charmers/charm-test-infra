@@ -24,7 +24,7 @@ paramiko  # For mojo_os_utils
 # OpenStack
 python-openstackclient>=3.14.0
 aodhclient
-python-designateclient
+python-designateclient>=1.5,<3.0.0
 python-barbicanclient
 python-ceilometerclient
 python-cinderclient
