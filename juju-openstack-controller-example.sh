@@ -36,8 +36,8 @@ grep ${CLOUD_NAME}-keystone juju-configs/clouds.yaml &&\
 
 # Add a cloud if it doesn't exist, update it if it does exist.
 juju show-cloud $CLOUD_NAME &> /dev/null &&\
-    juju update-cloud $CLOUD_NAME -f juju-configs/clouds.yaml --client &> /dev/null ||\
-        juju add-cloud $CLOUD_NAME -f juju-configs/clouds.yaml --client
+    juju update-cloud $CLOUD_NAME -f juju-configs/clouds.yaml --local &> /dev/null ||\
+        juju add-cloud $CLOUD_NAME -f juju-configs/clouds.yaml --local
 
 # Bootstrap a controller if it doesn't exist.
 juju switch $CONTROLLER_NAME &> /dev/null &&\
