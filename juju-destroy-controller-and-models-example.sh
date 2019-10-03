@@ -23,6 +23,6 @@ fi
 juju switch ${CONTROLLER_NAME}:controller
 
 if ! timeout 1200 juju destroy-controller --destroy-storage --destroy-all-models $1 $CONTROLLER_NAME; then
-    juju kill-controller $1 $CONTROLLER_NAME
+    juju kill-controller $1 $CONTROLLER_NAME || echo "Failed to kill controller" && exit 1
 fi
 
