@@ -1,9 +1,8 @@
 #!/bin/bash -e
 # OpenStack Tenant User - Juju Controller and Example Model Setup
 
-if [ -z "${OS_PROJECT_NAME}" ]; then
-  echo "ERROR: Have you sourced novarc?"
-  exit 1
+if [ -z "${OS_PROJECT_NAME}" ] || [ -z "${OS_AUTH_URL}" ] || [ -z "${OS_REGION_NAME}" ]; then
+  echo "ERROR: Have you sourced novarc or openrc?" && exit 1
 fi
 
 set -ux
@@ -16,6 +15,7 @@ set -ux
 : ${MODEL_CONSTRAINTS:="virt-type=kvm"}
 : ${WORKSPACE:="/tmp"}
 
+juju --version
 
 grep ${CLOUD_NAME}-keystone juju-configs/clouds.yaml && sed -e "s#http://${CLOUD_NAME}-keystone:5000/v3#${OS_AUTH_URL}#g" -i juju-configs/clouds.yaml ||:
 
@@ -33,9 +33,10 @@ grep ${CLOUD_NAME}-keystone juju-configs/clouds.yaml && sed -e "s#http://${CLOUD
 # openstack security group rule create default --egress --protocol tcp --dst-port 1:65535
 # openstack security group rule create default --egress --protocol udp --dst-port 1:65535
 
-juju add-cloud --replace $CLOUD_NAME juju-configs/clouds.yaml
+juju show-cloud $CLOUD_NAME -o temp.swp && juju update-cloud $CLOUD_NAME -f juju-configs/clouds.yaml --client ||\
+    juju add-cloud $CLOUD_NAME -f juju-configs/clouds.yaml --client
 
-juju switch $CONTROLLER_NAME && timeout 15 juju show-controller $CONTROLLER_NAME ||\
+juju switch $CONTROLLER_NAME && timeout 15 juju show-controller $CONTROLLER_NAME -o temp.swp ||\
     time juju bootstrap --bootstrap-constraints "$BOOTSTRAP_CONSTRAINTS" \
                         --constraints "$MODEL_CONSTRAINTS" \
                         --auto-upgrade=false \
@@ -46,14 +47,14 @@ juju switch $CONTROLLER_NAME && timeout 15 juju show-controller $CONTROLLER_NAME
 
 juju model-defaults network=$NETWORK_ID
 
-juju show-model ${CONTROLLER_NAME}:${MODEL_NAME} ||\
+juju show-model ${CONTROLLER_NAME}:${MODEL_NAME} -o temp.swp ||\
     juju add-model $MODEL_NAME $CLOUD_NAME \
                         --config=juju-configs/model-default-serverstack.yaml \
                         --config network=$NETWORK_ID
 
 # Ensure the model has contstraints set. Currently this must be done on every model due to bug:
 #     https://bugs.launchpad.net/juju/+bug/1653813
-juju models --format json &> $WORKSPACE/juju-models-before-constraints.json.txt
+juju models --format json -o $WORKSPACE/juju-models-before-constraints.json.txt
 juju set-model-constraints -m $MODEL_NAME "$MODEL_CONSTRAINTS"
 
 juju controllers
