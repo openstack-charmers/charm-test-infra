@@ -16,13 +16,8 @@ set -ux
 : ${CLOUD_NAME:="$OS_REGION_NAME"}
 : ${CONTROLLER_NAME:="${OS_PROJECT_NAME}-${CLOUD_NAME}"}
 
-if ! juju controllers | grep "$CONTROLLER_NAME.*superuser"; then
-    exit 0
+if juju controllers &> /dev/null; then
+    juju switch ${CONTROLLER_NAME}:controller
+    timeout 900 juju destroy-controller --destroy-storage --destroy-all-models $1 $CONTROLLER_NAME ||\
+        timeout 900 juju kill-controller $1 $CONTROLLER_NAME
 fi
-
-juju switch ${CONTROLLER_NAME}:controller
-
-if ! timeout 1200 juju destroy-controller --destroy-storage --destroy-all-models $1 $CONTROLLER_NAME; then
-    juju kill-controller $1 $CONTROLLER_NAME || echo "Failed to kill controller" && exit 1
-fi
-
