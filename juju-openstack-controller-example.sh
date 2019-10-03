@@ -17,7 +17,8 @@ set -ux
 
 juju --version
 
-grep ${CLOUD_NAME}-keystone juju-configs/clouds.yaml && sed -e "s#http://${CLOUD_NAME}-keystone:5000/v3#${OS_AUTH_URL}#g" -i juju-configs/clouds.yaml ||:
+grep ${CLOUD_NAME}-keystone juju-configs/clouds.yaml &&\
+    sed -e "s#http://${CLOUD_NAME}-keystone:5000/v3#${OS_AUTH_URL}#g" -i juju-configs/clouds.yaml ||:
 
 # Tenant may need to do this, but disabling here, as the undercloud that required it is WIP.
 #     https://bugs.launchpad.net/bugs/1680787
@@ -33,32 +34,39 @@ grep ${CLOUD_NAME}-keystone juju-configs/clouds.yaml && sed -e "s#http://${CLOUD
 # openstack security group rule create default --egress --protocol tcp --dst-port 1:65535
 # openstack security group rule create default --egress --protocol udp --dst-port 1:65535
 
-juju show-cloud $CLOUD_NAME -o temp.swp && juju update-cloud $CLOUD_NAME -f juju-configs/clouds.yaml --client ||\
-    juju add-cloud $CLOUD_NAME -f juju-configs/clouds.yaml --client
+# Add a cloud if it doesn't exist, update it if it does exist.
+juju show-cloud $CLOUD_NAME &> /dev/null &&\
+    juju update-cloud $CLOUD_NAME -f juju-configs/clouds.yaml --client &> /dev/null ||\
+        juju add-cloud $CLOUD_NAME -f juju-configs/clouds.yaml --client
 
-juju switch $CONTROLLER_NAME && timeout 15 juju show-controller $CONTROLLER_NAME -o temp.swp ||\
-    time juju bootstrap --bootstrap-constraints "$BOOTSTRAP_CONSTRAINTS" \
-                        --constraints "$MODEL_CONSTRAINTS" \
-                        --auto-upgrade=false \
-                        --model-default=juju-configs/model-default-serverstack.yaml \
-                        --config=juju-configs/controller-default.yaml \
-                        --config network=$NETWORK_ID \
-                        $CLOUD_NAME/$OS_REGION_NAME $CONTROLLER_NAME
+# Bootstrap a controller if it doesn't exist.
+juju switch $CONTROLLER_NAME &> /dev/null &&\
+    timeout 15 juju show-controller $CONTROLLER_NAME &> /dev/null ||\
+        time juju bootstrap --bootstrap-constraints "$BOOTSTRAP_CONSTRAINTS" \
+                            --constraints "$MODEL_CONSTRAINTS" \
+                            --auto-upgrade=false \
+                            --model-default=juju-configs/model-default-serverstack.yaml \
+                            --config=juju-configs/controller-default.yaml \
+                            --config network=$NETWORK_ID \
+                            $CLOUD_NAME/$OS_REGION_NAME $CONTROLLER_NAME
 
+# Set the project/tenant's network ID on the model default.
 juju model-defaults network=$NETWORK_ID
 
-juju show-model ${CONTROLLER_NAME}:${MODEL_NAME} -o temp.swp ||\
+# Add a model if it doesn't exist.
+juju show-model ${CONTROLLER_NAME}:${MODEL_NAME} &> /dev/null ||\
     juju add-model $MODEL_NAME $CLOUD_NAME \
-                        --config=juju-configs/model-default-serverstack.yaml \
-                        --config network=$NETWORK_ID
+                            --config=juju-configs/model-default-serverstack.yaml \
+                            --config network=$NETWORK_ID
 
 # Ensure the model has contstraints set. Currently this must be done on every model due to bug:
 #     https://bugs.launchpad.net/juju/+bug/1653813
 juju models --format json -o $WORKSPACE/juju-models-before-constraints.json.txt
 juju set-model-constraints -m $MODEL_NAME "$MODEL_CONSTRAINTS"
 
-juju controllers
-juju models
+juju controllers --refresh
+juju machines -m controller
+juju models --all
 juju status --color
 
 # EXAMPLE OUTPUT: results with serverstack osci user
