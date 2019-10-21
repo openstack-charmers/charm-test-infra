@@ -7,6 +7,13 @@ fi
 
 set -ux
 
+type openstack
+if [ $? == 1 ]
+then
+	echo "OpenStack is not installed. Installing now..."
+	sudo snap install --classic openstackclients
+fi
+
 : ${CLOUD_NAME:="$OS_REGION_NAME"}
 : ${CONTROLLER_NAME:="${OS_PROJECT_NAME}-${CLOUD_NAME}"}
 : ${MODEL_NAME:="${OS_PROJECT_NAME:0:12}"}
@@ -15,6 +22,12 @@ set -ux
 : ${MODEL_CONSTRAINTS:="virt-type=kvm"}
 : ${WORKSPACE:="/tmp"}
 
+type juju
+if [ $? == 1 ]
+then
+	echo "Juju is not installed. Installing now..."
+	sudo snap install --classic juju
+fi
 juju --version
 
 grep ${CLOUD_NAME}-keystone juju-configs/clouds.yaml &&\
