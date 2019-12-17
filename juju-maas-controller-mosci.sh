@@ -38,7 +38,7 @@ fi
 if [[ ${S390X} != true ]]; then
 #juju add-cloud --replace $CLOUD_NAME juju-configs/clouds.yaml
 juju update-cloud $CLOUD_NAME -f juju-configs/clouds.yaml --client
-juju add-credential --replace $CLOUD_NAME -f juju-configs/credentials.yaml --client
+juju add-credential $CLOUD_NAME -f juju-configs/credentials.yaml --client
 fi
 
 if [[ ${S390X} == 'true' ]] || [[ ${BOOTSTRAP_LOCAL} == 'true' ]]; then
