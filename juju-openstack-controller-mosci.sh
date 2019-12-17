@@ -51,7 +51,8 @@ juju metadata generate-image -d ~/simplestreams -i ${IMAGE_ID} -s ${OS_SERIES} -
 # openstack security group rule create default --egress --protocol udp --dst-port 1:65535
 
 juju controller-config features="[multi-cloud]"
-juju add-cloud --replace $CLOUD_NAME juju-configs/clouds.yaml
+#juju add-cloud --replace $CLOUD_NAME juju-configs/clouds.yaml
+juju update-cloud $CLOUD_NAME -f juju-configs/clouds.yaml --client
 
 juju autoload-credentials <<EOF
 1

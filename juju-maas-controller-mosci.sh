@@ -36,7 +36,8 @@ fi
 
 # XXX: Must edit credentials.yaml locally in advance to populate oauth(s)
 if [[ ${S390X} != true ]]; then
-juju add-cloud --replace $CLOUD_NAME juju-configs/clouds.yaml
+#juju add-cloud --replace $CLOUD_NAME juju-configs/clouds.yaml
+juju update-cloud $CLOUD_NAME juju-configs/clouds.yaml --client
 juju add-credential --replace $CLOUD_NAME -f juju-configs/credentials.yaml
 fi
 
