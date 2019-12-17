@@ -37,8 +37,8 @@ fi
 # XXX: Must edit credentials.yaml locally in advance to populate oauth(s)
 if [[ ${S390X} != true ]]; then
 #juju add-cloud --replace $CLOUD_NAME juju-configs/clouds.yaml
-juju update-cloud $CLOUD_NAME -f juju-configs/clouds.yaml --client
-juju add-credential --replace $CLOUD_NAME -f juju-configs/credentials.yaml
+juju update-cloud $CLOUD_NAME -f juju-configs/clouds.yaml --client --controller $CONTROLLER_NAME
+juju add-credential --replace $CLOUD_NAME -f juju-configs/credentials.yaml --client --controller $CONTROLLER_NAME
 fi
 
 if [[ ${S390X} == 'true' ]] || [[ ${BOOTSTRAP_LOCAL} == 'true' ]]; then
