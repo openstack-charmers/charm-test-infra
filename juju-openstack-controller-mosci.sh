@@ -54,7 +54,7 @@ juju controller-config features="[multi-cloud]"
 #juju add-cloud --replace $CLOUD_NAME juju-configs/clouds.yaml
 juju update-cloud $CLOUD_NAME -f juju-configs/clouds.yaml --client
 
-juju autoload-credentials --client --controller $CONTROLLER_NAME <<EOF
+juju autoload-credentials --client <<EOF
 1
 overcloud
 q
