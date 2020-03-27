@@ -9,7 +9,3 @@ transmit-vendor-metrics: false
 enable-os-upgrade: false
 automatically-retry-hooks: false
 use-default-secgroup: true
-# disable mounting of /dev/vdb so that all block devs are clean
-cloudinit-userdata: |
-  mounts:
-  - [ vdb ]
