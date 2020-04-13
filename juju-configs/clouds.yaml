@@ -4,13 +4,13 @@ clouds:
   icarus-maas:
     type: maas
     auth-types: [oauth1]
-    endpoint: http://icarus-maas/MAAS
+    endpoint: http://icarus-maas:5240/MAAS
 
   # Mixed Architecture Lab (MAAS 2.x Stable, f/k/a dellstack)
   ruxton-maas:
     type: maas
     auth-types: [oauth1]
-    endpoint: http://ruxton-maas/MAAS
+    endpoint: http://ruxton-maas:5240/MAAS
 
   # Amontons Virtual MAAS
   amontons-maas:
