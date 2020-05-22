@@ -13,8 +13,7 @@ argcomplete>=0.8.1  # Version in Xenial
 jinja2>=2.8  # Version in Xenial
 setuptools==36.4.0  # For Mojo
 bzr+lp:codetree#egg=codetree
-# bzr+lp:mojo#egg=mojo # disabled for our working branch on py3
-bzr+lp:~ost-maintainers/mojo/py3#egg=mojo
+bzr+lp:mojo#egg=mojo
 cmd2!=0.8.3  # MIT
 distro-info
 dnspython
