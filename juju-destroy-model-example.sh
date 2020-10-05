@@ -22,4 +22,4 @@ set -ux
 # 5 Minute timeout to allow juju to attempt to destroy openstack resources
 juju controllers &> /dev/null &&\
     juju show-model ${CONTROLLER_NAME}:${MODEL_NAME} &> /dev/null &&\
-        juju destroy-model --destroy-storage $1 ${CONTROLLER_NAME}:${MODEL_NAME} --force -t 300 ||:
+        juju destroy-model --destroy-storage $1 ${CONTROLLER_NAME}:${MODEL_NAME} --force -t 300s ||:
