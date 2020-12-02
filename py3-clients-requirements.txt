@@ -8,7 +8,7 @@ git+https://github.com/juju/juju-crashdump.git@dba9ff0e6d71d25d37d9011d032d5fcc1
 
 # Mojo
 juju-deployer
-websocket-client!=0.44.0  # https://bugs.launchpad.net/mojo/+bug/1713871
+websocket-client-py3!=0.44.0  # https://bugs.launchpad.net/mojo/+bug/1713871
 argcomplete>=0.8.1  # Version in Xenial
 jinja2>=2.8  # Version in Xenial
 setuptools==36.4.0  # For Mojo
@@ -20,7 +20,6 @@ bzr+lp:codetree#egg=python-codetree
 bzr+lp:~ost-maintainers/mojo/py3#egg=mojo
 
 cmd2!=0.8.3  # MIT
-distro-info
 dnspython
 babel!=2.4.0,>=2.3.4
 paramiko  # For mojo_os_utils
