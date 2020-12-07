@@ -25,15 +25,27 @@ babel!=2.4.0,>=2.3.4
 paramiko  # For mojo_os_utils
 
 # OpenStack
-python-openstackclient>=3.14.0
-aodhclient
+# Newer versions dropped Python 3.5 support:
+python-openstackclient>=3.14.0,<3.19.0
+aodhclient<1.3.0
 python-designateclient>=1.5,<3.0.0
-python-barbicanclient
+python-barbicanclient<5.0.0
 python-ceilometerclient
-python-cinderclient
-python-glanceclient
-python-heatclient
-python-keystoneclient
-python-neutronclient
-python-novaclient
-python-swiftclient
+python-cinderclient<4.3.0
+python-glanceclient<2.17.0
+python-heatclient<1.18.0
+python-keystoneclient<3.20.0
+python-neutronclient<6.13.0
+python-novaclient<14.0.0
+python-swiftclient<=3.8.0
+
+# Newer versions use keywords that didn't exist in
+# python 3.5 yet (e.g. "ModuleNotFoundError")
+importlib-metadata<3.0.0
+importlib-resources<3.0.0
+
+# Missing dependency of python-openstackclient:
+dogpile.cache<1.0.0
+
+# Dependency of python-glanceclient. Newer versions dropped Python 3.5 support:
+oslo.utils<=3.41.0
