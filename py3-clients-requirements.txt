@@ -25,27 +25,37 @@ babel!=2.4.0,>=2.3.4
 paramiko  # For mojo_os_utils
 
 # OpenStack
-# Newer versions dropped Python 3.5 support:
-python-openstackclient>=3.14.0,<3.19.0
-aodhclient<1.3.0
-python-designateclient>=1.5,<3.0.0
-python-barbicanclient<5.0.0
+python-openstackclient>=3.14.0,<3.19.0; python_version < '3.6'
+python-openstackclient>=3.14.0; python_version >= '3.6'
+aodhclient<1.3.0; python_version < '3.6'
+aodhclient; python_version >= '3.6'
+python-designateclient>=1.5,<3.0.0; python_version < '3.6'
+python-designateclient>=1.5; python_version >= '3.6'
+python-barbicanclient<5.0.0; python_version < '3.6'
+python-barbicanclient; python_version >= '3.6'
 python-ceilometerclient
-python-cinderclient<4.3.0
-python-glanceclient<2.17.0
-python-heatclient<1.18.0
-python-keystoneclient<3.20.0
-python-neutronclient<6.13.0
-python-novaclient<14.0.0
-python-swiftclient<=3.8.0
+python-cinderclient<4.3.0; python_version < '3.6'
+python-cinderclient; python_version >= '3.6'
+python-glanceclient<2.17.0; python_version < '3.6'
+python-glanceclient; python_version >= '3.6'
+python-heatclient<1.18.0; python_version < '3.6'
+python-heatclient; python_version >= '3.6'
+python-keystoneclient<3.20.0; python_version < '3.6'
+python-keystoneclient; python_version >= '3.6'
+python-neutronclient<6.13.0; python_version < '3.6'
+python-neutronclient; python_version >= '3.6'
+python-novaclient<14.0.0; python_version < '3.6'
+python-novaclient; python_version >= '3.6'
+python-swiftclient<=3.8.0; python_version < '3.6'
+python-swiftclient; python_version >= '3.6'
 
 # Newer versions use keywords that didn't exist in
 # python 3.5 yet (e.g. "ModuleNotFoundError")
-importlib-metadata<3.0.0
-importlib-resources<3.0.0
+importlib-metadata<3.0.0; python_version < '3.6'
+importlib-resources<3.0.0; python_version < '3.6'
 
 # Missing dependency of python-openstackclient:
-dogpile.cache<1.0.0
+dogpile.cache<1.0.0; python_version < '3.6'
 
 # Dependency of python-glanceclient. Newer versions dropped Python 3.5 support:
-oslo.utils<=3.41.0
+oslo.utils<=3.41.0; python_version < '3.6'
