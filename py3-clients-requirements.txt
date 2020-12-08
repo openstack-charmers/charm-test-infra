@@ -57,5 +57,9 @@ importlib-resources<3.0.0; python_version < '3.6'
 # Missing dependency of python-openstackclient:
 dogpile.cache<1.0.0; python_version < '3.6'
 
+# Dependency of python-openstackclient. Newer versions dropped Python 3.5
+# support:
+openstacksdk<=0.31.1; python_version < '3.6'
+
 # Dependency of python-glanceclient. Newer versions dropped Python 3.5 support:
 oslo.utils<=3.41.0; python_version < '3.6'
