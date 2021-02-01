@@ -17,7 +17,8 @@
 juju add-cloud $CLOUD_NAME juju-configs/clouds.yaml ||\
     juju update-cloud $CLOUD_NAME -f juju-configs/clouds.yaml
 
-juju add-credential --replace $CLOUD_NAME -f juju-configs/credentials.yaml
+juju update-credential $CLOUD_NAME -f juju-configs/credentials.yaml ||\
+    juju add-credential $CLOUD_NAME -f juju-configs/credentials.yaml
 
 juju switch $CONTROLLER_NAME ||\
     time juju bootstrap --bootstrap-constraints "$BOOTSTRAP_CONSTRAINTS" \
