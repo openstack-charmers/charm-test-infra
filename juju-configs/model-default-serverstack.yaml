@@ -9,3 +9,6 @@ transmit-vendor-metrics: false
 enable-os-upgrade: false
 automatically-retry-hooks: false
 use-default-secgroup: true
+# NOTE(ajkavanagh): juju changed default logging to INFO at 2.8.0 but we need a
+# bit more.  Optionally, we could add ";unit=TRACE" to get even more.
+logging-config: "<root>=DEBUG"
