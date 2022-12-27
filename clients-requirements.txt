@@ -3,7 +3,7 @@ websocket-client!=0.44.0  # https://bugs.launchpad.net/mojo/+bug/1713871
 argcomplete>=0.8.1  # Version in Xenial
 jinja2>=2.8  # Version in Xenial
 python-cinderclient>=1.0.0  # From Mojo requirements
-setuptools==36.4.0  # For Mojo
+setuptools==65.5.1  # For Mojo
 bzr+lp:codetree#egg=codetree
 
 # disabled because of a bug because of which whitelisted states aren't taken
