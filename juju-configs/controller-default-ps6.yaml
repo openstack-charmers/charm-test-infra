@@ -1,0 +1,9 @@
+# Bootstrap config defaults from charm-test-infra
+#   https://jujucharms.com/docs/2.1/controllers-creating
+#   https://jujucharms.com/docs/2.1/controllers
+bootstrap-timeout: 1200
+# NOTE(freyes): PS6 doesn't register the simplestreams index in keystone's
+# catalog, hence we need to pass the image-metadata-url explicitly, this index
+# only generates the 'released' stream, so we can't use the 'daily' images.
+image-metadata-url: https://radosgw.ps6.canonical.com:443/swift/v1/AUTH_2083b407a6754ab4b31ce1358b4f9bc8/swift/v1/simplestreams/data/
+image-stream: released

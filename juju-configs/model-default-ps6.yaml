@@ -1,0 +1,18 @@
+# Model defaults from charm-test-infra
+#   https://jujucharms.com/docs/2.1/models-config
+agent-stream: proposed
+test-mode: true
+transmit-vendor-metrics: false
+# https://bugs.launchpad.net/juju/+bug/1685351
+# enable-os-refresh-update: false
+enable-os-upgrade: false
+automatically-retry-hooks: false
+use-default-secgroup: true
+# NOTE(ajkavanagh): juju changed default logging to INFO at 2.8.0 but we need a
+# bit more.  Optionally, we could add ";unit=TRACE" to get even more.
+logging-config: "<root>=DEBUG"
+# NOTE(freyes): PS6 doesn't register the simplestreams index in keystone's
+# catalog, hence we need to pass the image-metadata-url explicitly, this index
+# only generates the 'released' stream, so we can't use the 'daily' images.
+image-metadata-url: https://radosgw.ps6.canonical.com:443/swift/v1/AUTH_2083b407a6754ab4b31ce1358b4f9bc8/swift/v1/simplestreams/data/
+image-stream: released
